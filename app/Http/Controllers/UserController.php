@@ -51,7 +51,7 @@ class UserController extends Controller
         //  $Register ->save();
      
     }
-    public function edit_user($id)
+    public function edit($id)
     {
         $user = User::where('id',$id)->first();
         // dd($user);
@@ -80,6 +80,11 @@ class UserController extends Controller
         $Register->update();
         return view('dashboard.dashboard');
 
+    }
+    public function delete($id)
+    {
+        $user = User::where('id',$id)->delete();
+        return redirect()->back();
     }
    
   

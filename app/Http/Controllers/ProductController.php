@@ -63,5 +63,11 @@ class ProductController extends Controller
 
     }
 
+    public function delete($id)
+    {
+        $product =Product::where('id',$id)->delete();
+        return redirect()->back();
+    }
+
 
 }

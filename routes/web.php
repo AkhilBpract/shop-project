@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +35,9 @@ Route::middleware([
     
     Route::post('/store',[UserController::class,'store'])->name('store');
 
-    Route::get('/edit-user/{id}/',[UserController::class,'edit_user'])->name('edit_user');
+    Route::get('/edit-user/{id}/',[UserController::class,'edit'])->name('edit_user');
+
+    Route::get('/delete-user/{id}/',[UserController::class,'delete'])->name('delete_user');
 
     Route::patch('/update-user/{id}/',[UserController::class,'update'])->name('update');
 
@@ -48,6 +51,8 @@ Route::middleware([
 
     Route::patch('/update-product/{id}',[ProductController::class,'update'])->name('update_product');
 
+    Route::get('/delete-product/{id}',[ProductController::class,'delete'])->name('delete_product');
+
     Route::get('/list-product-category',[CategoryController::class,'list'])->name('list_category');
 
     Route::get('/add-product-category',[CategoryController::class,'add'])->name('add_category');
@@ -59,8 +64,15 @@ Route::middleware([
     Route::patch('/update-product-category/{id}',[CategoryController::class,'update'])->name('update_category');
 
    
-   
+    Route::get('/transaction_list',[TransactionController::class,'index'])->name('transaction_list');
 
+    Route::get('/transaction',[TransactionController::class,'transaction'])->name('transaction');
+
+    Route::post('/get-product',[TransactionController::class,'product'])->name('get_product');
+
+    Route::post('/get-price',[TransactionController::class,'price'])->name('get_price');
+
+    Route::post('/store',[TransactionController::class,'store'])->name('store');
 
     
 });

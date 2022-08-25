@@ -16,14 +16,12 @@
         </ul>
     </div>
 @endif
-<p align="right"><a href = "{{route('dashboard')}}""><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
+<p align="right"><a href = "{{route('dashboard')}}"class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
     <form method="POST" action ="{{route('store_product')}}">
         @csrf
         <div class="container mt-5">
             <div class="row">
-            <div class="col-sm-6">
-                   
-                    
+            <div class="col-sm-6">                  
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Category</label>
                             <select class="form-control"  name="category_id" id="exampleFormControlSelect1">
@@ -46,11 +44,9 @@
                     <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="2">
                     <label class="form-check-label" for="inlineRadio2">2</label>
                     </div>
-
             </div> 
                     
             <div class="col-sm-6">
-
                     <div class="form-group">
                         <label for="exampleInputEmail1">Product Name</label>
                         <input type="text" name="product" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter ProductName">                       
@@ -59,13 +55,11 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Sale Price</label>
                         <input type="text" name="sale_price" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Price">                       
-                    </div>
-                                                                  
+                    </div>                                                                  
             </div>
             <div class="pt-5">
             <input class="btn btn-primary " type="submit" value="Submit">
-            </div>
-           
+            </div>           
         </div>
     </form> 
     

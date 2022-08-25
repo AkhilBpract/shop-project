@@ -40,6 +40,7 @@
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Product Category</label>
                             <select class="form-control"  name="category_id" id="category">
+                            <option>select</option>
                             @foreach($category as $item)
                             <option value="{{$item->id}}">{{$item->category}}</option>
                             @endforeach
@@ -48,8 +49,8 @@
                         </select>
                     </div> 
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Price</label>
-                        <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="exampleInputPassword1">Quantity</label>
+                        <input type="text" name="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>         
 
             </div>
@@ -59,21 +60,21 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">User Type</label>
                             <select class="form-control"  name="type" id="exampleFormControlSelect1">
-                            <option value="">-select</option>
+                            
                             <option value="customer"></option>                                                       
                         </select> 
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">product </label>
                             <select class="form-control"  name="product_id" id="product_id">
-                            <option ></option>
+                            
                                                                                   
                         </select> 
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">price </label>
                             <select class="form-control"  name="price" id="pirce_id">
-                            <option ></option>
+                             
                                                                                   
                         </select> 
                     </div>                        
@@ -95,7 +96,8 @@
 <script type="text/javascript">
 
 $(document).ready(function ($) {
-$("#category").change(function(e) {
+$("#category").click(function(e) {
+    console.log(1);
 
     $.ajaxSetup({
         headers: {
@@ -128,7 +130,7 @@ error:function (data) {
 <script type="text/javascript">
 
 $(document).ready(function ($) {
-$("#product_id").change(function(e) {
+$("#product_id").click(function(e) {
 
     $.ajaxSetup({
         headers: {

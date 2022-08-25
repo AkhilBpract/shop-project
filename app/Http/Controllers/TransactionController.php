@@ -49,14 +49,9 @@ class TransactionController extends Controller
         
         $price = Product::where('id',$product_id)->value('sale_price');
 
-        return response()->json(['sale_price'=>$price]);     
-       
+        // return response()->json(['sale_price'=>$price]);     
+        return response()->json($price);     
     }
-    // public function price(Request $request)
-    // {
-    //     $data['cities'] = Product::where("state_id", $request->state_id)
-    //                                 ->get(["name", "id"]);
 
-    //     return response()->json($data);
-    // }
+    
 }

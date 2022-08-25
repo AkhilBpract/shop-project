@@ -48,10 +48,12 @@
                                              
                         </select>
                     </div> 
+                    
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
                         <input type="text" name="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>         
+                    </div>    
+                  
 
             </div>
                     
@@ -73,10 +75,8 @@
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">price </label>
-                            <select class="form-control"  name="price" id="pirce_id">
-                             
-                                                                                  
-                        </select> 
+                            <input class="form-control" type="text" name="price" value="" id="pirce_id">
+                        
                     </div>                        
           
             </div>
@@ -146,20 +146,11 @@ dataType:'json',
 type:"POST",
 data: { product_id: product_id},
 success: function(res) {
+    console.log(res);
+    var x = res;
+  $("#pirce_id").val(x);   
 
-if (res) {
 
-    $("#pirce_id").empty();
-    $("#pirce_id").append;
-    $.each(res, function(key, value) {
-        $("#pirce_id").append('<option value="' + key + '">' + value +
-            '</option>');
-    });
-
-} else {
-
-    $("#pirce_id").empty();
-}
 }
 
 })

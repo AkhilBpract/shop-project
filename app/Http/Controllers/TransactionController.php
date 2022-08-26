@@ -13,10 +13,10 @@ class TransactionController extends Controller
     public function index()
     {
 
-        $datas = Transaction::get();
-        // dd($datas);
+        // $datas = Transaction::paginate(5);
         
-        return view('transaction.index',compact('datas'));
+        // return view('transaction.index',compact('datas'));
+        return view('transaction.index');
     }
     public function transaction()
     {
@@ -68,7 +68,8 @@ class TransactionController extends Controller
             'category_id'=>'required',
             'product_id'=>'required',
             'user_id'=>'required',
-            'quantity'=>'required',            
+            'quantity'=>'required',
+            
             'price'=>'required',
             'type'=>'required',
         ]);

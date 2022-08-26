@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-      {{dd($datas)}}
+     
 
 <div class="container">
  
@@ -35,11 +35,7 @@
     </teah>
 
     <tbody>
-      @foreach($datas ad $data)
-        <tr>
-          <td>{{$data->user['name']}}</td>
-        </tr>
-        @endforeach
+    
     </tbody>
     </table>
 

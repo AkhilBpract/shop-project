@@ -30,19 +30,19 @@
                             @endforeach     
                         </select>
                     </div>   
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="exampleInputEmail1">Vendor Price</label>
                         <input type="text" name="vendor_price" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Price">                       
                     </div>
                     
-                    <label class="mt-2" for="exampleInputEmail1">Available or Not</label>
+                    <label class="mt-2 " for="exampleInputEmail1">Available or Not</label>
                     <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1" checked>
-                    <label class="form-check-label" for="inlineRadio1">1</label>
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="2">
-                    <label class="form-check-label" for="inlineRadio2">2</label>
+                    <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0">
+                    <label class="form-check-label" for="inlineRadio2">No</label>
                     </div>
             </div> 
                     

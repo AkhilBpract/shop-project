@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class ProductCategory extends Model
 {
     use HasFactory;
-    protected $fillable = ['category'];
-    
+
+    protected $fillable = ['name','description','active'];
+
     public function product()
     {
         return $this->hasMany(Product::class);
@@ -25,5 +26,4 @@ class Category extends Model
         // dd(1);
         return ucfirst($category);
     }
-   
 }

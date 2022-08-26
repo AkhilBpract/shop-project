@@ -21,16 +21,16 @@
             </div>
 
             <div class="col-md-2">
-            <a href = "{{route('user')}}" class="btn btn-outline-primary">Coustomer/Vendor</a>
+            <a href = "{{route('customer.index')}}" class="btn btn-outline-primary">Customers</a>
             </div>
 
             <div class="col-md-2">
-            <a href = "{{route('product')}}" class="btn btn-outline-primary" >+Add Product </a>
+            <a href = "{{route('product')}}" class="btn btn-outline-primary" >Products </a>
             </div>
 
           
             <div class="col-md-2">
-            <a href = "{{route('list_category')}}" class="btn btn-outline-primary">+Add category</a>
+            <a href = "{{route('product_category.index')}}" class="btn btn-outline-primary">category</a>
             </div>
 
             <div class="col-md-2">

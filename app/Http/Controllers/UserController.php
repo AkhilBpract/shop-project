@@ -9,11 +9,11 @@ class UserController extends Controller
     public function list()
     {
         $user = User::paginate(5);
-        return view('user.index',compact('user'));
+        return view('customer.index',compact('user'));
     }
     public function add_user()
     {
-        return view('user.add');
+        return view('customer.add');
     }
     public function store(Request $request)
     {
@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         $user = User::where('id',$id)->first();
         // dd($user);
-        return view('user.edit',compact('user'));
+        return view('customer.edit',compact('user'));
     }
 
     public function update(Request $request,$id)

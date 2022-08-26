@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
@@ -29,17 +29,8 @@ Route::middleware([
         return view('dashboard.dashboard');
     })->name('dashboard');
 
-    Route::get('/user',[UserController::class,'list'])->name('user');
 
-    Route::get('/add-user',[UserController::class,'add_user'])->name('add_user');
-    
-    Route::post('/store',[UserController::class,'store'])->name('store');
-
-    Route::get('/edit-user/{id}/',[UserController::class,'edit'])->name('edit_user');
-
-    Route::get('/delete-user/{id}/',[UserController::class,'delete'])->name('delete_user');
-
-    Route::patch('/update-user/{id}/',[UserController::class,'update'])->name('update');
+    Route::resource('customer', CustomerController::class);
 
     Route::get('/product',[ProductController::class,'list'])->name('product');
 
@@ -52,16 +43,9 @@ Route::middleware([
     Route::patch('/update-product/{id}',[ProductController::class,'update'])->name('update_product');
 
     Route::get('/delete-product/{id}',[ProductController::class,'delete'])->name('delete_product');
+    
 
-    Route::get('/list-product-category',[CategoryController::class,'list'])->name('list_category');
-
-    Route::get('/add-product-category',[CategoryController::class,'add'])->name('add_category');
-
-    Route::post('/store-product-category',[CategoryController::class,'store'])->name('store_category');
-
-    Route::get('/edit-product-category/{id}',[CategoryController::class,'edit'])->name('edit_category');
-
-    Route::patch('/update-product-category/{id}',[CategoryController::class,'update'])->name('update_category');
+    Route::resource('product_category', ProductCategoryController::class);
 
    
     Route::get('/transaction_list',[TransactionController::class,'index'])->name('transaction_list');

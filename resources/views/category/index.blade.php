@@ -7,28 +7,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>
-  <p align="right">     
-    <a href="{{route('add_category')}}" class="btn btn-outline-primary">Add Category</a>
-</p>
- 
- 
+  <div class="container">
+  <div class="row">
+      <div class="col-sm-9">      
+        <a href="{{ route('product_category.create') }}" class="btn btn-outline-primary">Add Category</a>
+      </div>
+      <div class ="col-sm-3">
+        <p align="right"><a href = "{{route('dashboard')}}""><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
+      </div>
+  </div>
+  </div>
+ <div class="container">
   <table class="table">  
     <thead>
         <tr>
         <th>Categories</h>        
-        <th>Edit</h>
+        <th>Delete</h>
         </tr>
     </teah>
    
     <tbody>
     @foreach($category as $data)
         <tr>
-        <td>{{$data->category}}</td>       
-        <td><a href="{{route('edit_category',$data->id)}}" class="btn btn-outline-primary">Edit</a></td>
-        </tr>
+        <td>{{$data->name}}</td> 
+
+        <td><a href="{{route('product_category.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
+
+           <td>
+          <form action="{{route('product_category.destroy',$data->id)}}" method="POST">
+            @csrf
+            @method('delete')
+            <button class="btn btn-danger" type="submit">delete</button> 
+          </td>     
+          </tr>
         @endforeach
     </tbody>
 </table>
+</div>
      
         
       

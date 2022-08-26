@@ -17,6 +17,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+   
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = strtolower($name);
@@ -49,6 +50,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'type',
+        'active',
     ];
 
     /**

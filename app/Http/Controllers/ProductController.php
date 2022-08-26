@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\ProductCategory;
 use App\Models\Product;
 class ProductController extends Controller
 {
     public function list()
     {
-        $datas = Category::with('product')->get();
+        $datas = ProductCategory::with('product')->get();
         return view('product.index',compact('datas'));
         
     }
     public function add()
     {
         // $data = Category::get();
-        $data = Category::with('product')->get();
+        $data = ProductCategory::with('product')->get();
         return view('product.add',compact('data'));
     }
     public function store(Request $request)
@@ -44,7 +44,7 @@ class ProductController extends Controller
         // dd($request->category_id);
         $products = Product::where('id',$id)->first();
         // dd($products->category_id);
-        $datas = Category::get();
+        $datas = ProductCategory::get();
         return view('product.edit',compact('products','datas'));
     }
     public function update(Request $request , $id)

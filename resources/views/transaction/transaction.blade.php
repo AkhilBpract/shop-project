@@ -28,7 +28,8 @@
             <div class="col-sm-6">
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">User </label>
-                            <select class="form-control"  name="user_id" id="exampleFormControlSelect1">
+                            <select class="form-control"  name="user_id" id="user_id">
+                                <option>-select-</option>
                             @foreach($users as $data)
                             <option value="{{$data->id}}">{{$data->name}}</option>
                             @endforeach
@@ -39,8 +40,8 @@
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Product Category</label>
-                            <select class="form-control"  name="category_id" id="category">
-                            <option>select</option>
+                            <select class="form-control"  name="category_id" id="category_id">
+                            <option>-select-</option>
                             @foreach($category as $item)
                             <option value="{{$item->id}}">{{$item->category}}</option>
                             @endforeach
@@ -51,8 +52,16 @@
                     
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
-                        <input type="text" name="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="text" name="quantity" class="form-control" id="// dd($category);
+              $users = User::get();
+            //   dd($users);" placeholder="">
                     </div>    
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Amount</label>
+                        <input type="text" name="amount" class="form-control" id="amount" placeholder="">
+                    </div>    
+                  
                   
 
             </div>
@@ -61,15 +70,13 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">User Type</label>
-                            <select class="form-control"  name="type" id="exampleFormControlSelect1">
-                            
-                            <option value="customer"></option>                                                       
-                        </select> 
+                            <input class="form-control"  name="type" id="type">                            
+                        
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">product </label>
                             <select class="form-control"  name="product_id" id="product_id">
-                            
+                           
                                                                                   
                         </select> 
                     </div>
@@ -93,10 +100,45 @@
   </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+
+
 <script type="text/javascript">
 
 $(document).ready(function ($) {
-$("#category").click(function(e) {
+$("#user_id").click(function(e) {
+
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+e.preventDefault();
+
+var user_id =  $(this).val();
+$.ajax({
+url:"{{ route('get_type') }}",
+dataType:'json',
+type:"POST",
+data: { user_id: user_id},
+success: function(res) {
+    console.log(res);
+    var x = res;
+  $("#type").val(x);   
+
+
+}
+
+})
+});
+});
+</script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function ($) {
+$("#category_id").click(function(e) {
     console.log(1);
 
     $.ajaxSetup({
@@ -106,12 +148,12 @@ $("#category").click(function(e) {
         });
 e.preventDefault();
 
-var category =  $(this).val();
+var category_id =  $(this).val();
 $.ajax({
 url:"{{ route('get_product') }}",
 dataType:'html',
 type:"POST",
-data: { category_id: category},
+data: { category_id: category_id},
 
 success:function (data) {
   
@@ -126,6 +168,8 @@ error:function (data) {
 });
 });
 </script>
+
+
 
 <script type="text/javascript">
 
@@ -157,3 +201,5 @@ success: function(res) {
 });
 });
 </script>
+
+

@@ -68,9 +68,13 @@ Route::middleware([
 
     Route::get('/transaction',[TransactionController::class,'transaction'])->name('transaction');
 
+    Route::post('/get-type',[TransactionController::class,'type'])->name('get_type');
+
     Route::post('/get-product',[TransactionController::class,'product'])->name('get_product');
 
     Route::post('/get-price',[TransactionController::class,'price'])->name('get_price');
+
+   
 
     Route::post('/store',[TransactionController::class,'store'])->name('store');
 

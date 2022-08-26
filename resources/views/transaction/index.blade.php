@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-      
+      {{dd($datas)}}
 
 <div class="container">
  
@@ -33,13 +33,11 @@
         <th>Delete</h>
         </tr>
     </teah>
-   
-    <tbody>
-    @foreach($datas as $data)
 
+    <tbody>
+      @foreach($datas ad $data)
         <tr>
-        <td>{{$data->user->name}}</td>
-                
+          <td>{{$data->user['name']}}</td>
         </tr>
         @endforeach
     </tbody>

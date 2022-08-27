@@ -5,27 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class Sale extends Model
 {
     use HasFactory;
-
-    // protected $fillable = ['date','category_id','product_id','user_id','type','quantity','price','amount']; 
-
+    protected $table = 'transactions';
     protected $guarded = [];
     protected $fillable = ['date','product_category_id','product_id','user_id','type','quantity','price','amount']; 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+   
     public function category()
     {
-        return $this->hasOne(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class);
     }
 
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
    
 }

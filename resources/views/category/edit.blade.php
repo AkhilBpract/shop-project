@@ -16,6 +16,12 @@
         </ul>
     </div>
 @endif
+@if(session('status'))
+        <div class="mt-1 mb-1 alert alert-success">
+            {{ session('status') }}
+        </div>
+@endif
+
  <div class="container">
  <p align="right"><a href = "{{route('dashboard')}}"class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
 </div>

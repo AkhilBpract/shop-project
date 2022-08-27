@@ -16,8 +16,16 @@
         </ul>
     </div>
 @endif
+@if(session('status'))
+        <div class="mt-1 mb-1 alert alert-success">
+            {{ session('status') }}
+        </div>
+@endif
+
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
-    <form method="POST" action ="{{route('customer.update',$user->id)}}">
+<center><h1><b>Edit Customer</b></h1></center>
+
+    <form method="POST" action ="{{route('customer.update',$Customer->id)}}">
         @csrf
         @method('patch')
         <div class="container mt-5">
@@ -25,19 +33,19 @@
             <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer Name</label>
-                        <input type="text" name="name" value="{{$user->name}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
+                        <input type="text" name="name" value="{{$Customer->name}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
                     </div>
                     <div class="form-group mt-4">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" name="email" value="{{$user->email}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Email">                       
+                        <input type="email" name="email" value="{{$Customer->email}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Email">                       
                     </div> 
                     <label>Active or Not</label>
                     <div class="form-check form-check-inline mt-3">
-                        <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1" {{ ($user->active=="1")? "checked" : "" }}>
+                        <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1" {{ ($Customer->active=="1")? "checked" : "" }}>
                         <label class="form-check-label" for="inlineRadio1">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0"  {{ ($user->active=="0")? "checked" : "" }}>
+                        <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0"  {{ ($Customer->active=="0")? "checked" : "" }}>
                         <label class="form-check-label" for="inlineRadio2">No</label>
                     </div>                                               
 
@@ -47,7 +55,7 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Address</label>
-                        <textarea class="form-control" name="address" value="{{$user->address}}" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <textarea class="form-control" name="address" value="{{$Customer->address}}" id="exampleFormControlTextarea1" rows="2">{{$Customer->address}}</textarea>
                     </div>                   
                              
                     

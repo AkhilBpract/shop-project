@@ -16,6 +16,12 @@
         </ul>
     </div>
 @endif
+@if(session('status'))
+        <div class="mt-1 mb-1 alert alert-success">
+            {{ session('status') }}
+        </div>
+@endif
+
     <p align="right"><a href = "{{route('dashboard')}}"><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
     <form method="POST" action ="{{route('product_category.store')}}">
         @csrf

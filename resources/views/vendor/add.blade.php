@@ -23,13 +23,13 @@
 @endif
 
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
-    <form method="POST" action ="{{route('customer.store')}}">
+    <form method="POST" action ="{{route('vendor.store')}}">
         @csrf
         <div class="container mt-5">
             <div class="row">
             <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Customer Name</label>
+                        <label for="exampleInputEmail1">Venodr Name</label>
                         <input type="text" name="name" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
                     </div>
                     <div class="form-group mt-4">

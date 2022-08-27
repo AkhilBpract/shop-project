@@ -7,6 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>
+  @if(session('status'))
+        <div class="mt-1 mb-1 alert alert-success">
+            {{ session('status') }}
+        </div>
+@endif
   <div class="container">
   <div class="row">
       <div class="col-sm-9">      
@@ -21,23 +26,28 @@
   <table class="table">  
     <thead>
         <tr>
+      
         <th>Categories</h>        
+        <th>Edit</h>
         <th>Delete</h>
         </tr>
     </teah>
    
     <tbody>
     @foreach($category as $data)
+    
         <tr>
+       
         <td>{{$data->name}}</td> 
 
         <td><a href="{{route('product_category.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
 
-           <td>
+           <td>         
           <form action="{{route('product_category.destroy',$data->id)}}" method="POST">
-            @csrf
-            @method('delete')
-            <button class="btn btn-danger" type="submit">delete</button> 
+          @method('delete')
+          @csrf
+          <button class="btn btn-danger" type="submit">delete</button> 
+          </form>           
           </td>     
           </tr>
         @endforeach

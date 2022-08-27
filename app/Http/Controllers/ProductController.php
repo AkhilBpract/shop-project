@@ -1,73 +1,109 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use Illuminate\Http\Request;
+
 class ProductController extends Controller
 {
-    public function list()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $datas = ProductCategory::with('product')->get();
-        return view('product.index',compact('datas'));
-        
+        // dd($datas);
+    return view('product.index',compact('datas'));
     }
-    public function add()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        // $data = Category::get();
-        $data = ProductCategory::with('product')->get();
+        $data = ProductCategory::get();
         return view('product.add',compact('data'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        //return $request->all();
-        $validated = $request->validate([
-            'category_id'=>'required',
-            'product'=>'required',
-            'vendor_price'=>'required',
-            'sale_price'=>'required',
-            'active'=>'required',
-        ]);
-        //  dd($validated);
-        // dd($validated);
       
-        Product::create($validated);
-        
-        return redirect()->back();
-        // $store->category_id = $request->category_id;
+        $validated = $request->validate([
+            'product_category_id' =>'required',
+            'vendor_price' =>'required',
+            'product' =>'required',
+            'sale_price' =>'required',
+        ]);
+       
+        Product::create($request->all());
+        return redirect()->back()->with('status','added successfully');
+       
     }
 
-
-    public function edit(request $request,$id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Product $product)
     {
-        // dd($request->category_id);
-        $products = Product::where('id',$id)->first();
-        // dd($products->category_id);
-        $datas = ProductCategory::get();
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $product)
+    {
+        $datas = productCategory::get(); 
+        $products = $product;
         return view('product.edit',compact('products','datas'));
     }
-    public function update(Request $request , $id)
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Product $product)
     {
-        // dd($request);
-        $Update = Product::where('id',$id)->first();
-        Product::where('id',$id)->update([
-            'category_id'=>$request->category_id,
-            'vendor_price'=>$request->vendor_price,
-            'active'=>$request->active,
-            'sale_price'=>$request->sale_price,
-            'product'=>$request->product,
+        $validated = $request->validate([
+            'product_category_id' =>'required',
+            'vendor_price' =>'required',
+            'product' =>'required',
+            'sale_price' =>'required',
         ]);
-        return redirect()->back();
-
+        $product->update($request->all());
+        return redirect()->back()->with('status','update successfully');
 
     }
 
-    public function delete($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Product $product)
     {
-        $product =Product::where('id',$id)->delete();
+        $product->delete();
         return redirect()->back();
     }
-
-
 }

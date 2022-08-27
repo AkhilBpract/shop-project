@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Customer;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class VenderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-       
-        $user= Customer::where('type','customer')->get();
-        return view('customer.index',compact('user'));
+        $user= Vendor::where('type','vendor')->get();
+        // dd($user);
+        return view('vendor.index',compact('user'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customer.add');
+        return view('vendor.add');
     }
 
     /**
@@ -37,27 +37,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
            'password'=>'required|password',
         ]);
-        // dd($request);
-        $request['type'] = 'customer';
-        
-        Customer::create($request->all());
-        return redirect()->back()->with('status','added successfully');
+        $request['password'] = Hash::make('password');
+        $request['type'] = 'vendor';
 
+        Vendor::create($request->all());
+        return redirect()->back()->with('status','added successfully ');
+       
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $Customer)
+    public function show(Vendor $vendor)
     {
         //
     }
@@ -65,47 +64,45 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $Customer)
+    public function edit(Vendor $vendor)
     {
-        // $Customer->$id;
-        // dd($Customer->id);
-        $Customer = $Customer;
-        // dd($Customer->address);
-        return view('customer.edit',compact('Customer'));
+        $vendor = $vendor;
+        return view('vendor.edit',compact('vendor'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $Customer)
+    public function update(Request $request, Vendor $vendor)
     {
-        // dd($request->email);
-    
         $validated = $request->validate([
-            'name'=>'required',         
+            'name'=>'required',
             'email' => 'required|unique:users,email,'.$request->email.',email',
+          
         ]);
-        $request['type'] = 'customer';
-        $Customer ->update($request->all());
+       
+        $request['type'] = 'vendor';
+
+        $vendor->update($request->all());
         return redirect()->back()->with('status','update successfully ');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $Customer)
+    public function destroy(Vendor $vendor)
     {
-        $Customer->delete();
-        return redirect()->back();
+        $vendor->delete();
+        return redirect()->back()->with('status','deleted successfully');
     }
 }

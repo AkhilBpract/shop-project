@@ -11,7 +11,7 @@
     <div class="container">
     <div class="row">
       <div class="col-sm-9">
-      <a href = "{{route('add_product')}}" class="btn btn-outline-primary">+ Add Product</button></a>
+      <a href = "{{route('product.create')}}" class="btn btn-outline-primary">+ Add Product</button></a>
       </div>
       <div class="col-sm-3">
       <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</button></a></p>
@@ -37,13 +37,18 @@
       @foreach($datas as $data)
       @foreach($data->product as $products)
         <tr>
-          <td>{{$data->category}}</td>
+          <td>{{$data->name}}</td>
           <td>{{$products->product}}</td>  
           <td>{{$products->vendor_price}}</td> 
           <td>{{$products->sale_price}}</td> 
           <td>@if($products->active == 1)active @else Not Active @endif</td>  
-          <td><a href="{{route('edit_product',$products->id)}}"  class="btn btn-outline-primary">Edit </a></td>
-          <td><a href="{{route('delete_product',$products->id)}}"  class="btn btn-outline-primary">Delete </a></td>          
+          <td><a href="{{route('product.edit',$products->id)}}"  class="btn btn-outline-primary">Edit </a></td>
+          <td><form action="{{route('product.destroy',$products->id)}}" method="POST">
+              @csrf
+              @method('delete')
+              <button class="btn btn-danger" type="submit">delete</button> 
+            </td> 
+        </form>          
         </tr>
         @endforeach        
       @endforeach     

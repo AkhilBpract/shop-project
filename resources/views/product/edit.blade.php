@@ -16,20 +16,26 @@
         </ul>
     </div>
 @endif
+@if(session('status'))
+        <div class="mt-1 mb-1 alert alert-success">
+            {{ session('status') }}
+        </div>
+@endif
+
 <p align="right"><a href = "{{route('dashboard')}}""><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
-    <form method="POST" action ="{{route('update_product',$products->id)}}">
+<center><h1>Update Product</h/></center>
+<form method="POST" action ="{{route('product.update',$products->id)}}">
         @csrf
         @method('patch')
-        <div class="container mt-5">
+        <div class="container mt-5">            
             <div class="row">
-            <div class="col-sm-6">
-                   
+            <div class="col-sm-6">                
                     
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Category</label>
-                            <select class="form-control"  name="category_id" id="exampleFormControlSelect1">
+                            <select class="form-control"  name="product_category_id" id="exampleFormControlSelect1">
                             @foreach($datas as $item)
-                            <option value= "{{$item->id}}"{{$item->id == $products->category_id}} >{{$item->category}}</option>
+                            <option value= "{{$item->id}}"{{$item->id == $products->product_category_id}} >{{$item->name}}</option>
                             @endforeach     
                         </select>
                     </div>   
@@ -41,11 +47,11 @@
                     <label class="mt-2" for="exampleInputEmail1">Available or Not</label>
                     <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1"{{ ($products->active=="1")? "checked" : "" }} >
-                    <label class="form-check-label" for="inlineRadio1">1</label>
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0"  {{ ($products->active=="0")? "checked" : "" }}>
-                    <label class="form-check-label" for="inlineRadio2">2</label>
+                    <label class="form-check-label" for="inlineRadio2">No</label>
                     </div>
 
             </div> 
@@ -61,6 +67,10 @@
                         <label for="exampleInputEmail1">Sale Price</label>
                         <input type="text" name="sale_price" value="{{$products->sale_price}}"  class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Price">                       
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        <input type="text" name="description" value="{{$products->description}}" class="form-control" id="Enter " aria-describedby="emailHelp" placeholder="Enter Description">                       
+                    </div>  
                                                                   
             </div>
             <div class="pt-5">

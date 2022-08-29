@@ -46,7 +46,7 @@ class VenderController extends Controller
         $request['type'] = 'vendor';
 
         Vendor::create($request->all());
-        return redirect()->back()->with('status','added successfully ');
+        return redirect()->back()->with('status','create successfully ');
        
     }
 
@@ -91,7 +91,7 @@ class VenderController extends Controller
         $request['type'] = 'vendor';
 
         $vendor->update($request->all());
-        return redirect()->back()->with('status','update successfully ');
+        return redirect()->back()->with('status','edit successfully ');
     }
 
     /**

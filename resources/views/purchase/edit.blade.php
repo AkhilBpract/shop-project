@@ -23,37 +23,41 @@
             {{ session('status') }}
         </div>
 @endif
+    
+
 <div class="container">
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
-<center><h1>Purchase</h1></center>
+<center><h1>Edit Purchase</h1></center>
 </div>
-<form method="POST" action ="{{route('purchase.store')}}">
+<form method="POST" action ="{{route('purchase.update',$purchase_data->id)}}">
     @csrf        
-              
+    @method('patch')
     <div class="container mt-3">
         <div class="row">
-             
+            
             <div class="col-sm-6">
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Vendor Name </label>
-                            <select class="form-control"  name="user_id" id="user_id">
-                                <option>-select-</option>
-                            @foreach($users as $data)
-                            <option value="{{$data->id}}">{{$data->name}}</option>
+                            <select class="form-control"  name="user_id" id="user_id">                                
+                            @foreach($users as $data)                       
+                            <option value="{{$data->id}}" {{ ( $data->id == $purchase_data->user_id) ? 'selected' : '' }}>{{$data->name}}</option>
                             @endforeach                        
                                
                         </select> 
-                    </div>
+                    </div> 
                     <div class="form-group">
-                            <label for="exampleFormControlSelect1">product </label>
-                            <select class="form-control"  name="product_id" id="product_id">                           
-                                                                                  
+                            <label for="exampleFormControlSelect1">product </label>                        
+         
+                            <select class="form-control"name="product_id" id="product_id">                           
+                            @foreach($product as $data)                          
+                            <option value="{{$data->id}}"{{($data->id == $purchase_data->product_id)? 'selected' : '' }}>{{$data->product}}</option>
+                            @endforeach                                     
                         </select> 
                     </div>
      
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
-                        <input type="text" name="quantity" class="form-control" id=""     placeholder="">
+                        <input type="text" name="quantity" value="{{$purchase_data->quantity}}"  class="form-control" id=""     placeholder="">
                     </div>    
 
             </div>
@@ -63,21 +67,23 @@
             <div class="form-group">
                             <label for="exampleFormControlSelect1">Product Category</label>
                             <select class="form-control"  name="product_category_id" id="category_id">
-                            <option>-select-</option>
+                           
                             @foreach($product_category as $data)
-                            <option value="{{$data->id}}">{{$data->name}}</option>
+                            <option value="{{$data->id}}" {{$data->id == $purchase_data->product_category_id}} >{{$data->name}}</option>
                             @endforeach                
                         </select>
                     </div> 
                     
                     <div class="form-group">
-                            <label for="exampleFormControlSelect1">price </label>
-                            <input class="form-control" type="text" name="price" value="" id="pirce_id">
-                        
+                            <label for="exampleFormControlSelect1">price </label>                            
+                            <input class="form-control" type="text" value="{{$purchase_data->price}}"  name="price"  id="pirce_id">
+                             
                     </div>  
                       <div class="form-group">
                         <label for="exampleInputPassword1">Amount</label>
-                        <input type="text" name="amount" class="form-control" id="amount" placeholder="">
+                      
+                        <input type="text" name="amount" value="{{$purchase_data->amount}}"  class="form-control" id="amount" placeholder="">
+                       
                     </div> 
                                            
           
@@ -95,6 +101,9 @@
   </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+
+
 
 
 <script type="text/javascript">

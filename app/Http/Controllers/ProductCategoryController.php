@@ -42,7 +42,7 @@ class ProductCategoryController extends Controller
         ]);
 
         ProductCategory::create($request->all());
-        return redirect()->back()->with('status', 'successfullly added!');
+        return redirect()->back()->with('status', 'create successfully ');
     }
 
     /**
@@ -82,7 +82,7 @@ class ProductCategoryController extends Controller
         ]);
 
         $productCategory->update($request->all());
-        return redirect()->back()->with('status', 'successfullly updatate!');
+        return redirect()->back()->with('status', ' edit successfullly');
     }
 
     /**

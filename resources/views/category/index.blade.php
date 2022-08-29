@@ -15,7 +15,7 @@
   <div class="container">
   <div class="row">
       <div class="col-sm-9">      
-        <a href="{{ route('product_category.create') }}" class="btn btn-outline-primary">Add Category</a>
+        <a href="{{ route('product_category.create') }}" class="btn btn-outline-primary">+Create Category</a>
       </div>
       <div class ="col-sm-3">
         <p align="right"><a href = "{{route('dashboard')}}""><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>

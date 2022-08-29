@@ -21,7 +21,7 @@
   <div class="container">
  
     <table class="table">
-      <h4>Customer</h4>
+      <h4>Vendor</h4>
       <thead>
           <tr>
           <th>Name</h>

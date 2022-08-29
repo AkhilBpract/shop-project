@@ -18,7 +18,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales_data  =  Sale::with(['product','user','category'])->get();
+        $sales_data  =  Transaction::where('type','customer')->get();
+        // dd($sales_data);
         return view('sale.index',compact('sales_data'));
     }
 
@@ -55,7 +56,7 @@ class SaleController extends Controller
         $request['date'] = $today;
         $request['type']= 'customer';
         Sale::create($request->all());
-        return redirect()->back()->with('status','added succesfully');
+        return redirect()->back()->with('status','sale succesfully');
 
     }
 
@@ -78,11 +79,13 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        $users = User::where('type','customer')->get();       
-        $category = ProductCategory::get();
-        $sale =$sale;
-        // dd($sale->user_id);
-        return view('sale.edit',compact('users','category','sale'));
+        $sales_data =$sale;    
+        $users = User::where('type','customer')->get();          
+        $product = Product::where('id',$sales_data->product_id)->get();         
+        $product_category = ProductCategory::get();
+
+              
+        return view('sale.edit',compact('users','product_category','sales_data','product'));
     }
 
     /**
@@ -102,8 +105,8 @@ class SaleController extends Controller
             'price'=>'required', 
             'amount'=>'required',            
         ]);       
-        sale::create($request->all());
-        return redirect()->back()->with('status','added succesfully');
+        $sale->update($request->all());
+        return redirect()->back()->with('status','edit succesfully');
     }
 
     /**
@@ -118,22 +121,7 @@ class SaleController extends Controller
         return redirect()->back()->with('status','deleted successfully');
     }
 
-    public function product(Request $request)
-    {
-        $category = $request->category_id;
-        
-        $products = Product::where('product_category_id',$category)->get();
-        return view('sale.product',compact('products'));
-    }
-
-    public function price(Request $request)
-    {
-        $product_id = $request->product_id;
-        
-        $price = Product::where('id',$product_id)->value('sale_price');
-        // return response()->json(['sale_price'=>$price]);     
-        return response()->json($price);     
-    }
+   
 
   
 }

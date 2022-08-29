@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,20 +46,12 @@ Route::middleware([
 
     Route::resource('purchase', PurchaseController::class);
 
-    Route::post('/get-product',[SaleController::class,'product'])->name('get_product');
+    Route::post('/get-product',[TransactionController::class,'product'])->name('get_product');
 
-    Route::post('/get-price',[SaleController::class,'price'])->name('get_price');   
+    Route::post('/get-price',[TransactionController::class,'price'])->name('get_price');   
 
     
 
-    Route::post('/get-product/purchase',[SaleController::class,'product'])->name('product');
-
-    Route::post('/get-price/purchase',[SaleController::class,'price'])->name('price');   
-
-
-   
-
-   
 
     
 });

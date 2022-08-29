@@ -21,10 +21,10 @@
             {{ session('status') }}
         </div>
 @endif
-
-
+<div class="container">
 <p align="right"><a href = "{{route('dashboard')}}"class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
-<center><h1>Add New Product</h/></center>
+</div>
+<center><h1>Create Product</h/></center>
 <form method="POST" action ="{{route('product.store')}}">
         @csrf
         <div class="container mt-5">

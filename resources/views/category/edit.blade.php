@@ -22,9 +22,10 @@
         </div>
 @endif
 
- <div class="container">
- <p align="right"><a href = "{{route('dashboard')}}"class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
-</div>
+<div class="container">
+    <p align="right"><a href = "{{route('dashboard')}}"class="btn btn-outline-primary">>> back to dashboard</a>  </p>
+    </div>
+    <center><h1><b>Edit Category</b></h1></center>  
     <form method="POST" action ="{{route('product_category.update',$productCategory->id)}}">
         @csrf
         @method('patch')
@@ -36,10 +37,7 @@
                         <label for="exampleInputEmail1">Category</label>
                         <input type="text" name="name" value="{{$productCategory->name}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Description</label>
-                        <input type="text" name="description" class="form-control" value="{{$productCategory->description}}" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
-                    </div>  
+                     
                     <label>Active or Not</label>
                     <div class="form-check form-check-inline mt-3">
                         <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1" {{ ($productCategory->active=="1")? "checked" : "" }}>
@@ -51,10 +49,16 @@
                     </div> 
                    
                 </div>         
-
+                <div class="col-sm-6">
+                <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        <input type="text" name="description" class="form-control" value="{{$productCategory->description}}" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
+                    </div> 
+                </div>  
             </div>
+            <div class="container mt-5">
                     
-          
+            </div>   
             <div class="pt-5">
             <input class="btn btn-primary " type="submit" value="Submit">
             </div>

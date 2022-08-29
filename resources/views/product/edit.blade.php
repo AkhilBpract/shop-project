@@ -21,9 +21,10 @@
             {{ session('status') }}
         </div>
 @endif
-
+<div class="container">
 <p align="right"><a href = "{{route('dashboard')}}""><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
-<center><h1>Update Product</h/></center>
+</div>
+<center><h1>Edit Product</h/></center>
 <form method="POST" action ="{{route('product.update',$products->id)}}">
         @csrf
         @method('patch')
@@ -35,7 +36,7 @@
                             <label for="exampleFormControlSelect1">Category</label>
                             <select class="form-control"  name="product_category_id" id="exampleFormControlSelect1">
                             @foreach($datas as $item)
-                            <option value= "{{$item->id}}"{{$item->id == $products->product_category_id}} >{{$item->name}}</option>
+                            <option value= "{{$item->id}}"{{($item->id == $products->product_category_id) ? 'selected' : ''}} >{{$item->name}}</option>
                             @endforeach     
                         </select>
                     </div>   

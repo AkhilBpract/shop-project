@@ -10,8 +10,8 @@ class Product extends Model
     use HasFactory;
     protected $fillable = ['product_category_id','category_id','product','vendor_price','sale_price','active','description'];
     // protected $guarded = [];
-    public function product()
+    public function product_transaction()
     {
-        return $this->hasOne(Sale::class);
+        return $this->belongsTo(Transaction::class);
     }
 }

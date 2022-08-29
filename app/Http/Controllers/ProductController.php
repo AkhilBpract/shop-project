@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $datas = ProductCategory::with('product')->get();
-        // dd($datas);
+       
     return view('product.index',compact('datas'));
     }
 
@@ -47,7 +47,7 @@ class ProductController extends Controller
         ]);
        
         Product::create($request->all());
-        return redirect()->back()->with('status','added successfully');
+        return redirect()->back()->with('status','create successfully');
        
     }
 
@@ -91,7 +91,7 @@ class ProductController extends Controller
             'sale_price' =>'required',
         ]);
         $product->update($request->all());
-        return redirect()->back()->with('status','update successfully');
+        return redirect()->back()->with('status','edit successfully');
 
     }
 

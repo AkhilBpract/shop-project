@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-            <a href = "{{route('sale.create')}}" class="btn btn-outline-primary">New Sale</a>
+            <a href = "{{route('sale.create')}}" class="btn btn-outline-primary">Sale</a>
             </div>
             <div class="col-sm-3">
             <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</a></p>
@@ -27,13 +27,14 @@
 <div class="container">
  
   <table class="table">
-    <u><h4>Sales Table</h4></u>
+    <h4>Sales </h4>
     <thead>
         <tr>
         <th>Name</th>        
         <th>edit</th>
         <th>Delete</th>
         <th>Product</th>
+        <th>Edit</th>
         <th>Delete</th>
         </tr>
     </teah>
@@ -43,7 +44,10 @@
     </tbody>
     @foreach($sales_data as $data)
       <tr>
-        <td>{{$data->user->name}}</td>       
+      <td>{{$loop->iteration}}</td> 
+        <td>{{$data->user->name}}</td>   
+        <td>{{$data->product_category->name}}</td> 
+        <td>{{$data->product->product}}</td> 
         <td><a href="{{route('sale.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
         <td><form action="{{route('sale.destroy',$data->id)}}" method="POST">
               @csrf

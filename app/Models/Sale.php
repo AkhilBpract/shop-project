@@ -12,18 +12,8 @@ class Sale extends Model
     protected $guarded = [];
     protected $fillable = ['date','product_category_id','product_id','user_id','type','quantity','price','amount']; 
    
-    public function category()
-    {
-        return $this->belongsTo(ProductCategory::class);
-    }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    
+
    
 }

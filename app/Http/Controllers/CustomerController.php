@@ -47,7 +47,7 @@ class CustomerController extends Controller
         $request['type'] = 'customer';
         
         Customer::create($request->all());
-        return redirect()->back()->with('status','added successfully');
+        return redirect()->back()->with('status','create successfully');
 
     }
 
@@ -94,7 +94,7 @@ class CustomerController extends Controller
         ]);
         $request['type'] = 'customer';
         $Customer ->update($request->all());
-        return redirect()->back()->with('status','update successfully ');
+        return redirect()->back()->with('status','edit successfully ');
     }
 
     /**

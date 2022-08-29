@@ -11,11 +11,16 @@ class ProductCategory extends Model
 
     protected $fillable = ['name','description','active','product_category_id','category_id','product','vendor_price','sale_price','active','description'];
 
-    public function category()
+    public function transaction()
     {
-        return $this->hasOne(Sale::class);
+        return $this->hasOne(Transaction::class);
     }
-  
+
+   public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+    
     
     public function setCategoryAttribute($category)
     {

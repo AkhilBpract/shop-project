@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\ProductCategory;
+use App\Models\User;
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class PurchaseController extends Controller
 {
     /**
@@ -14,8 +17,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $datas   = Purchase::get();
-        return view('purchase.index',compact('datas'));
+        $purchase_datas   = Transaction::where('type','vendor')->get();
+        return view('purchase.index',compact('purchase_datas'));
     }
 
     /**
@@ -25,7 +28,9 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        return view('purchase.add');
+        $product_category = ProductCategory::get();
+        $users = User::where('type','vendor')->get();
+        return view('purchase.add',compact('users','product_category'));
     }
 
     /**
@@ -36,7 +41,19 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'product_category_id'=>'required',
+            'product_id'=>'required',
+            'user_id'=>'required',
+            'quantity'=>'required',            
+            'price'=>'required', 
+            'amount'=>'required',            
+        ]);
+        $today = Carbon::today();
+        $request['date'] = $today;
+        $request['type']= 'vendor';
+        Purchase::create($request->all());
+        return redirect()->back()->with('status','purchase succesfully');
     }
 
     /**
@@ -58,7 +75,12 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        //  $user = User::where('type','owner')->first(); 
+        $purchase_data =$purchase;  
+        $product_category = ProductCategory::get();   
+        $users = User::where('type','vendor')->get();          
+        $product = Product::where('id',$purchase_data->product_id)->get();         
+        
+        return view('purchase.edit',compact('purchase_data','product_category','users','product',));
     }
 
     /**
@@ -70,7 +92,16 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        //
+        $validated = $request->validate([
+            'product_category_id'=>'required',
+            'product_id'=>'required',
+            'user_id'=>'required',
+            'quantity'=>'required',            
+            'price'=>'required', 
+            'amount'=>'required',            
+        ]);       
+        $purchase->update($request->all());
+        return redirect()->back()->with('status','edit successfully');
     }
 
     /**
@@ -81,22 +112,8 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
+        return redirect()->back()->with('status','deleted successfully');
     }
-    public function product(Request $request)
-    {
-        $category = $request->category_id;
-        
-        $products = Product::where('product_category_id',$category)->get();
-        return view('sale.product',compact('products'));
-    }
-
-    public function price(Request $request)
-    {
-        $product_id = $request->product_id;
-        
-        $price = Product::where('id',$product_id)->value('sale_price');
-        // return response()->json(['sale_price'=>$price]);     
-        return response()->json($price);     
-    }
+   
 }

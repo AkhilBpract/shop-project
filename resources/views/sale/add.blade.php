@@ -35,7 +35,7 @@
              
             <div class="col-sm-6">
                     <div class="form-group">
-                            <label for="exampleFormControlSelect1">User </label>
+                            <label for="exampleFormControlSelect1">Customer Name </label>
                             <select class="form-control"  name="user_id" id="user_id">
                                 <option>-select-</option>
                             @foreach($users as $data)

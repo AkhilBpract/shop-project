@@ -17,15 +17,14 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function category()
+    public function product_category()
     {
-        return $this->hasOne(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class);
     }
-
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-
+   
    
 }

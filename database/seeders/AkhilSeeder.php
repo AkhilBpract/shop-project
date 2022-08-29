@@ -4,7 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use DB;
-class akhil_purchasedb extends Seeder
+class AkhilSeeder extends Seeder
 {
     /**
      * Run the database seeds.

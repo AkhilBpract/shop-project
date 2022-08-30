@@ -44,12 +44,12 @@
                                
                         </select> 
                     </div>
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleFormControlSelect1">product </label>
                             <select class="form-control"  name="product_id" id="product_id">                           
                                                                                   
-                        </select> 
-                    </div>
+                            </select> 
+                        </div>
      
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
@@ -60,7 +60,7 @@
                     
             <div class="col-sm-6">
 
-            <div class="form-group">
+                    <div class="form-group">
                             <label for="exampleFormControlSelect1">Product Category</label>
                             <select class="form-control"  name="product_category_id" id="category_id">
                            

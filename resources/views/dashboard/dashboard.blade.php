@@ -39,10 +39,12 @@
             <a href = "{{route('product_category.index')}}" class="btn btn-outline-primary">Category</a>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
             <a href = "{{route('product.index')}}" class="btn btn-outline-primary" >Products </a>
             </div>
-            
+            <div class="col-md-1">
+            <a href = "{{route('report')}}" class="btn btn-outline-primary" >report </a>
+            </div>
 
             
 

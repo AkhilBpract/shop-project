@@ -48,7 +48,12 @@ Route::middleware([
 
     Route::post('/get-product',[TransactionController::class,'product'])->name('get_product');
 
-    Route::post('/get-price',[TransactionController::class,'price'])->name('get_price');   
+    Route::post('/get-price',[TransactionController::class,'price'])->name('get_price');  
+    
+    Route::get('/report',[TransactionController::class,'report'])->name('report');   
+
+
+    Route::get('/profit-loss',[TransactionController::class,'transaction'])->name('transaction');   
 
     
 

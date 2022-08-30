@@ -53,7 +53,7 @@
      
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
-                        <input type="text" name="quantity" class="form-control" id=""     placeholder="">
+                        <input type="text" name="quantity" class="form-control" id="quantity_id"     placeholder="">
                     </div>    
 
             </div>
@@ -63,7 +63,7 @@
             <div class="form-group">
                             <label for="exampleFormControlSelect1">Product Category</label>
                             <select class="form-control"  name="product_category_id" id="category_id">
-                            <option>-select-</option>
+                           
                             @foreach($category as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach                
@@ -72,7 +72,7 @@
                     
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">price </label>
-                            <input class="form-control" type="text" name="price" value="" id="pirce_id">
+                            <input class="form-control" type="text" name="price"id="pirce_id">
                         
                     </div>  
                       <div class="form-group">
@@ -153,15 +153,30 @@ type:"POST",
 data: { product_id: product_id},
 success: function(res) {
     console.log(res);
-    var x = res;
-  $("#pirce_id").val(x);   
+    var price = res;
+  $("#pirce_id").val(price);   
+  
 
-
-}
+},
+  
 
 })
 });
 });
+$("#quantity_id").keyup(function(){
+    var qty= $(this).val();
+    console.log(1);
+    if(qty){  
+  
+    var price=$("#pirce_id").val();
+    var amt= qty*price;
+    $("#amount").val(amt);
+  }
+  });
 </script>
+
+
+
+
 
 

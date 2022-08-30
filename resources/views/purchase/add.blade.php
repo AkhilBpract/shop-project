@@ -53,7 +53,7 @@
      
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
-                        <input type="text" name="quantity" class="form-control" id=""     placeholder="">
+                        <input type="text" name="quantity" class="form-control" id="quantity_id"     placeholder="">
                     </div>    
 
             </div>
@@ -162,6 +162,17 @@ success: function(res) {
 })
 });
 });
+
+$("#quantity_id").keyup(function(){
+    var qty= $(this).val();
+    console.log(1);
+    if(qty){  
+  
+    var price=$("#pirce_id").val();
+    var amt= qty*price;
+    $("#amount").val(amt);
+  }
+  });
 </script>
 
 

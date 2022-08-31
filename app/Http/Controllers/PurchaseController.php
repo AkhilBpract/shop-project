@@ -49,8 +49,8 @@ class PurchaseController extends Controller
             'price'=>'required', 
             'amount'=>'required',            
         ]);
-        $today = Carbon::today();
-        $request['date'] = $today;
+       
+        $request['date'] =  $today = Carbon::today();
         $request['type']= 'vendor';
         Purchase::create($request->all());
         return redirect()->back()->with('status','purchase succesfully');

@@ -156,7 +156,7 @@ e.preventDefault();
 
 var product_id =  $(this).val();
 $.ajax({
-url:"{{ route('get_price') }}",
+url:"{{ route('get_purchase_price') }}",
 dataType:'json',
 type:"POST",
 data: { product_id: product_id},

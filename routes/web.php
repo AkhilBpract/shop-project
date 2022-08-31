@@ -49,10 +49,12 @@ Route::middleware([
 
     Route::post('/get-product',[AjaxController::class,'product'])->name('get_product');
 
-    Route::post('/get-price',[AjaxController::class,'price'])->name('get_price');  
+    Route::post('/get-price',[AjaxController::class,'price'])->name('get_price'); 
+    
+    Route::post('/get-price',[AjaxController::class,'purchasePrice'])->name('get_purchase_price'); 
     
     Route::get('/report',[ReportController::class,'report'])->name('report');
-
+   
     Route::get('/profit-loss',[ReportController::class,'profitreport'])->name('profitreport');
     
 });

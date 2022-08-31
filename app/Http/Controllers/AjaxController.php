@@ -19,4 +19,11 @@ class AjaxController extends Controller
         $price = Product::where('id',$product_id)->value('sale_price');            
         return response()->json($price);     
     }
+
+    public function purchasePrice(Request $request)
+    {
+        $product_id = $request->product_id;        
+        $price = Product::where('id',$product_id)->value('vendor_price');            
+        return response()->json($price);     
+    }
 }

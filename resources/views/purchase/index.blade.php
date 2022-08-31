@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-            <a href = "{{route('purchase.create')}}" class="btn btn-outline-primary">Purchase</a>
+            <a href = "{{route('purchase.create')}}" class="btn btn-outline-primary">Create Purchase</a>
             </div>
             <div class="col-sm-3">
             <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</a></p>

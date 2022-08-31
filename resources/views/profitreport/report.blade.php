@@ -8,11 +8,14 @@
   </head>
   <body>
     <div class="container">
-    <center><u><h1>Report</h1></u></center>
-    @if($message == "loss")
-  <h4><p class="text-danger">Result : {{$message}} : {{$report}} $</p></h4>
-   @else <h4><p class="text-success">Result : {{$message}} : {{$report}} $ </p></h4>@endif
-</div>
+      <center><u><h1>Report</h1></u></center>
+        <h4><p>SalesAmount : $ {{$salesAmount}}</p></h4>
+        <h4><p>PurchaseAmount : $ {{$purchaseAmount}}</p></h4>
+        @if($message == "loss")
+          <h4><p class="text-danger">Result : {{$message}} : $ {{$report}} </p></h4>
+          @else <h4><p class="text-success">Result : {{$message}} : $ {{$report}}  </p></h4>
+        @endif
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
 </html>

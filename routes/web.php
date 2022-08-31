@@ -8,7 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\TransactionController;
-
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,17 +47,12 @@ Route::middleware([
 
     Route::resource('purchase', PurchaseController::class);
 
-    Route::post('/get-product',[TransactionController::class,'product'])->name('get_product');
+    Route::post('/get-product',[AjaxController::class,'product'])->name('get_product');
 
-    Route::post('/get-price',[TransactionController::class,'price'])->name('get_price');  
+    Route::post('/get-price',[AjaxController::class,'price'])->name('get_price');  
     
-    Route::get('/report',[TransactionController::class,'report'])->name('report');   
+    Route::get('/report',[ReportController::class,'report'])->name('report');
 
-
-    Route::get('/profit-loss',[TransactionController::class,'transaction'])->name('transaction');   
-
-    
-
-
+    Route::get('/profit-loss',[ReportController::class,'profitreport'])->name('profitreport');
     
 });

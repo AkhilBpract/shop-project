@@ -51,9 +51,8 @@ class SaleController extends Controller
             'quantity'=>'required',            
             'price'=>'required', 
             'amount'=>'required',            
-        ]);
-        $today = Carbon::today();
-        $request['date'] = $today;
+        ]);       
+        $request['date'] =Carbon::today();
         $request['type']= 'customer';
         Sale::create($request->all());
         return redirect()->back()->with('status','sale succesfully');
@@ -83,7 +82,6 @@ class SaleController extends Controller
         $users = User::where('type','customer')->get();          
         $product = Product::where('id',$sales_data->product_id)->get();         
         $product_category = ProductCategory::get();
-
               
         return view('sale.edit',compact('users','product_category','sales_data','product'));
     }

@@ -22,7 +22,7 @@
     <p align="right"><a href = "{{route('dashboard')}}"><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
 </div> 
 <center><h1><b>Report</b></h1></center>   
-    <form method="GET" action ="{{route('transaction')}}">
+    <form method="GET" action ="{{route('profitreport')}}">
         
         <div class="container mt-5">
             <div class="row">

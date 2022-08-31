@@ -48,14 +48,7 @@ class Transaction extends Model
         $result = $salesAmount - $purchaseAmount; 
         return  $result;
     }
-    public static function getPurchaseAmount($request)
-    {
-        $from = date($request->from_date);
-        $to = date($request->to_date);        
-       
-  
-        return ;
-    }
+    
 
 }
  

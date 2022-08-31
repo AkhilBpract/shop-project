@@ -26,12 +26,7 @@ class TransactionController extends Controller
     public function transaction(Request $request)
     {   
         $result = Transaction::getAmountWithDate($request);           
-        
-        // $purchaseAmount = Transaction::getPurchaseAmount ($request);
-        
-        
-        
-        
+       
         // dd($amount);
          
         if($result <= 0)

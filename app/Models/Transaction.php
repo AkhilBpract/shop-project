@@ -24,8 +24,38 @@ class Transaction extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }   
+    public static function getAmountWithDate($request)
+    {         
+        $from = date($request->from_date);
+        $to = date($request->to_date);        
+        $salesAmount = SELF::whereBetween('date',[$from,$to])->where('type','customer')->sum('amount');
+        $purchaseAmount = SELF::whereBetween('date',[$from,$to])->where('type','vendor')->sum('amount');
+        $salesAmount = Transaction::where( function($query) use($request){
+            $fromDate = date($request->from_date);
+            $toDate = date($request->to_date);
+            $query->whereBetween('date',[$fromDate,$toDate])->where('product_category_id',$request->product_category_id)
+            ->where('product_id',$request->product_id)->where('type','customer');
+     
+        })->sum('amount'); 
+        $purchaseAmount = Transaction::where( function($query) use($request){
+            $fromDate = date($request->from_date);
+            $toDate = date($request->to_date);
+            $query->whereBetween('date',[$fromDate,$toDate])->where('product_category_id',$request->product_category_id)
+            ->where('product_id',$request->product_id)->where('type','vendor');
+     
+        })->sum('amount'); 
+        $result = $salesAmount - $purchaseAmount; 
+        return  $result;
+    }
+    public static function getPurchaseAmount($request)
+    {
+        $from = date($request->from_date);
+        $to = date($request->to_date);        
+       
+  
+        return ;
     }
 
-   
 }
  

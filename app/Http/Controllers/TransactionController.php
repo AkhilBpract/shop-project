@@ -5,7 +5,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
-
+use DB;
 class TransactionController extends Controller
 {
     public function product(Request $request)
@@ -24,27 +24,27 @@ class TransactionController extends Controller
     }
 
     public function transaction(Request $request)
-    {      
-        $from = date($request->from_date);
-
-        $to = date($request->to_date);
-        $salesAmount = Transaction::getSalesAmount($from, $to);
-        dd($salesAmount);
-        $purchase_amount = Transaction::whereBetween('date', [$from, $to])->where('type','vendor')->sum('amount');
-
-        $result = $sales_amount - $purchase_amount;    
-
+    {   
+        $result = Transaction::getAmountWithDate($request);           
+        
+        // $purchaseAmount = Transaction::getPurchaseAmount ($request);
+        
+        
+        
+        
+        // dd($amount);
+         
         if($result <= 0)
         {
-            $qwerty = abs($result);
+            $report = abs($result);
             $message="loss";
             
         }else{
-            $message="earn";
+            $report = $result;
+            $message="profit";
         
         }
-
-        return view('transaction.report',compact('result','message'));
+        return view('transaction.report',compact('report','message'));
 
     }
 

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Vendor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class VenderController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class VenderController extends Controller
      */
     public function index()
     {
-        $user= Vendor::where('type','vendor')->get();
-        // dd($user);
+        $user= User::vendor()->get();   
         return view('vendor.index',compact('user'));
     }
 
@@ -40,23 +40,22 @@ class VenderController extends Controller
         $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
-           'password'=>'required|password',
+           'password'=>'required',
         ]);
         $request['password'] = Hash::make('password');
         $request['type'] = 'vendor';
 
-        Vendor::create($request->all());
+        User::create($request->all());
         return redirect()->back()->with('status','create successfully ');
-       
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Vendor $vendor)
+    public function show(User $user)
     {
         //
     }
@@ -64,12 +63,11 @@ class VenderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vendor $vendor)
-    {
-        $vendor = $vendor;
+    public function edit(User $vendor)
+    {      
         return view('vendor.edit',compact('vendor'));
     }
 
@@ -77,19 +75,16 @@ class VenderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vendor  $vendor
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor)
+    public function update(Request $request, User $vendor)
     {
         $validated = $request->validate([
             'name'=>'required',
-            'email' => 'required|unique:users,email,'.$request->email.',email',
-          
-        ]);
-       
+            'email' => 'required|unique:users,email,'.$request->email.',email',          
+        ]);       
         $request['type'] = 'vendor';
-
         $vendor->update($request->all());
         return redirect()->back()->with('status','edit successfully ');
     }
@@ -97,11 +92,12 @@ class VenderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vendor $vendor)
+    public function destroy(User $vendor)
     {
+        
         $vendor->delete();
         return redirect()->back()->with('status','deleted successfully');
     }

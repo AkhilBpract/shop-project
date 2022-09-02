@@ -27,7 +27,7 @@
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 <center><h1>Create Sales</h1></center>
 </div>
-<form method="POST" action ="{{route('sale.store')}}">
+<form method="POST" action ="{{route('sales.store')}}">
     @csrf        
               
     <div class="container mt-3">
@@ -53,7 +53,7 @@
      
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
-                        <input type="text" name="quantity" class="form-control" id="quantity_id"     placeholder="">
+                        <input type="text" name="quantity" class="form-control" id="quantity_id"  placeholder="">
                     </div>    
 
             </div>
@@ -158,7 +158,10 @@ success: function(res) {
   
 
 },
-  
+error:function (data) {
+    $("#product_id").html('There was an error please contact administrator');
+
+}, 
 
 })
 });

@@ -50,7 +50,7 @@
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">product </label>
                             <select class="form-control"  name="product_id" id="product_id">                           
-                                                                                  
+                                                                               
                             </select> 
                     </div>
             </div>

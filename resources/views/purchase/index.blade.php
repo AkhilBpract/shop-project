@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-            <a href = "{{route('purchase.create')}}" class="btn btn-outline-primary">Create Purchase</a>
+            <a href = "{{route('purchases.create')}}" class="btn btn-outline-primary">Create Purchase</a>
             </div>
             <div class="col-sm-3">
             <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</a></p>
@@ -27,7 +27,7 @@
      
 
 <div class="container">
- 
+
   <table class="table">
    <h4>Purchase </h4>
     <thead>
@@ -44,9 +44,9 @@
     </teah>
 
     <tbody>
-    
-    </tbody>
+   
     @foreach($purchase_datas as $data)
+ 
       <tr>
         <td>{{$data->user->name}}</td>
         <td>{{$data->product_category->name}}</td>
@@ -54,8 +54,8 @@
         <td>{{$data->quantity}}</td>
         <td>{{$data->price}}</td>        
         <td>{{$data->amount}}</td>
-        <td><a href="{{route('purchase.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
-        <td><form action="{{route('purchase.destroy',$data->id)}}" method="POST">
+        <td><a href="{{route('purchases.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
+        <td><form action="{{route('purchases.destroy',$data->id)}}" method="POST">
               @csrf
               @method('delete')
               <button class="btn btn-danger" type="submit">delete</button> 
@@ -63,8 +63,13 @@
         </form>  
       
       </tr>
+     
       @endforeach
+   
+    </tbody>
+    
     </table>
+  
 
 </div>
         

@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-            <a href = "{{route('sale.create')}}" class="btn btn-outline-primary">Create Sale</a>
+            <a href = "{{route('sales.create')}}" class="btn btn-outline-primary">Create Sales</a>
             </div>
             <div class="col-sm-3">
             <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</a></p>
@@ -25,7 +25,7 @@
      
 
 <div class="container">
- 
+
   <table class="table">
     <h4>Sales </h4>
     <thead>
@@ -34,6 +34,9 @@
         <th>edit</th>
         <th>Delete</th>
         <th>Product</th>
+        <th>Sale Amount</th>
+        <th>Quantity</th>
+        <th>Totsl Amount</th>
         <th>Edit</th>
         <th>Delete</th>
         </tr>
@@ -48,8 +51,11 @@
         <td>{{$data->user->name}}</td>   
         <td>{{$data->product_category->name}}</td> 
         <td>{{$data->product->product}}</td> 
-        <td><a href="{{route('sale.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
-        <td><form action="{{route('sale.destroy',$data->id)}}" method="POST">
+        <td>{{$data->price}}</td> 
+        <td>{{$data->quantity}}</td> 
+        <td>{{$data->amount}}</td> 
+        <td><a href="{{route('sales.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
+        <td><form action="{{route('sales.destroy',$data->id)}}" method="POST">
               @csrf
               @method('delete')
               <button class="btn btn-danger" type="submit">delete</button> 
@@ -58,6 +64,7 @@
       </tr>
       @endforeach
     </table>
+   
 
 </div>
         

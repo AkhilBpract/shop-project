@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\VenderController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
@@ -35,23 +35,25 @@ Route::middleware([
     })->name('dashboard');
 
 
-    Route::resource('customer', CustomerController::class);
+    Route::resource('customers', CustomerController::class);
 
-    Route::resource('vendor', VenderController::class);
+    Route::resource('vendors', VendorController::class);
 
     Route::resource('product_category', ProductCategoryController::class);
 
     Route::resource('product', ProductController::class);
 
-    Route::resource('sale', SaleController::class);
+    //Route::resource('transactions', TransactionController::class);
 
-    Route::resource('purchase', PurchaseController::class);
+    Route::resource('sales', SaleController::class);
+
+    Route::resource('purchases', PurchaseController::class);
 
     Route::post('/get-product',[AjaxController::class,'product'])->name('get_product');
 
-    Route::post('/get-price',[AjaxController::class,'price'])->name('get_price'); 
+    Route::post('/get-price',[AjaxController::class,'salePrice'])->name('get_price'); 
     
-    Route::post('/get-price',[AjaxController::class,'purchasePrice'])->name('get_purchase_price'); 
+    Route::post('/get-purchase-price',[AjaxController::class,'purchasePrice'])->name('get_purchase_price'); 
     
     Route::get('/report',[ReportController::class,'report'])->name('report');
    

@@ -25,7 +25,7 @@
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 </div>
 <center><h1><b>Create Customer</b></h1></center>    
-<form method="POST" action ="{{route('customer.store')}}">
+<form method="POST" action ="{{route('customers.store')}}">
         @csrf
         <div class="container mt-5">
             <div class="row">

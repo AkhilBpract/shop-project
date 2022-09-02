@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\ProductCategory;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Product;
-use App\Models\Purchase;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 class PurchaseController extends Controller
@@ -16,9 +15,11 @@ class PurchaseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $purchase_datas   = Transaction::where('type','vendor')->get();
+    {      
+        $purchase_datas   = Transaction::purchase()->get();
         return view('purchase.index',compact('purchase_datas'));
+
+        
     }
 
     /**
@@ -29,7 +30,7 @@ class PurchaseController extends Controller
     public function create()
     {
         $product_category = ProductCategory::get();
-        $users = User::where('type','vendor')->get();
+        $users = User::vendor()->get();
         return view('purchase.add',compact('users','product_category'));
     }
 
@@ -51,18 +52,18 @@ class PurchaseController extends Controller
         ]);
        
         $request['date'] =  $today = Carbon::today();
-        $request['type']= 'vendor';
-        Purchase::create($request->all());
+        $request['type']= 'purchase';
+        Transaction::create($request->all());
         return redirect()->back()->with('status','purchase succesfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Purchase  $purchase
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Purchase $purchase)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -70,27 +71,26 @@ class PurchaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Purchase  $purchase
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Purchase $purchase)
+    public function edit(Transaction $purchase)
     {
         $purchase_data =$purchase;  
         $product_category = ProductCategory::get();   
-        $users = User::where('type','vendor')->get();          
-        $product = Product::where('id',$purchase_data->product_id)->get();         
-        
-        return view('purchase.edit',compact('purchase_data','product_category','users','product',));
+        $users = User::vendor()->get();          
+        $product = Product::where('id',$purchase->product_id)->get();       
+        return view('purchase.edit',compact('purchase','product_category','users','product',));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Purchase  $purchase
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Purchase $purchase)
+    public function update(Request $request, Transaction $purchase)
     {
         $validated = $request->validate([
             'product_category_id'=>'required',
@@ -107,13 +107,12 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Purchase  $purchase
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Purchase $purchase)
+    public function destroy(Transaction $purchase)
     {
         $purchase->delete();
         return redirect()->back()->with('status','deleted successfully');
     }
-   
 }

@@ -19,18 +19,18 @@
         <div class="row mt-5">
        
             <div class="col-md-2" >
-            <a href = "{{route('sale.index')}}" class="btn btn-outline-primary">Sale</a>
+            <a href = "{{route('sales.index')}}" class="btn btn-outline-primary">Sale</a>
             </div>
             <div class="col-md-2">            
-            <a href = "{{route('purchase.index')}}" class="btn btn-outline-primary">Purchase</a>            
+            <a href = "{{route('purchases.index')}}" class="btn btn-outline-primary">Purchase</a>            
             </div>
 
             <div class="col-md-2">
-            <a href = "{{route('customer.index')}}" class="btn btn-outline-primary">Customers</a>
+            <a href = "{{route('customers.index')}}" class="btn btn-outline-primary">Customers</a>
             </div>
 
             <div class="col-md-2">
-            <a href = "{{route('vendor.index')}}" class="btn btn-outline-primary">Vendor</a>
+            <a href = "{{route('vendors.index')}}" class="btn btn-outline-primary">Vendor</a>
            
             </div>
 
@@ -43,10 +43,8 @@
             <a href = "{{route('product.index')}}" class="btn btn-outline-primary" >Products </a>
             </div>
             <div class="col-md-1">
-            <a href = "{{route('report')}}" class="btn btn-outline-primary" >report </a>
-            </div>
-
-            
+            <a href = "{{route('report')}}" class="btn btn-outline-primary" >Report </a>
+            </div>           
 
         </div>
     </div>

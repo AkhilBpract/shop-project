@@ -35,7 +35,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Category</label>
-                        <input type="text" name="name" value="{{$productCategory->name}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
+                        <input type="text" name="name" value="{{$productCategory->name}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Category">                       
                     </div>
                      
                     <label>Active or Not</label>
@@ -52,7 +52,7 @@
                 <div class="col-sm-6">
                 <div class="form-group">
                         <label for="exampleInputEmail1">Description</label>
-                        <input type="text" name="description" class="form-control" value="{{$productCategory->description}}" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
+                        <input type="text" name="description" class="form-control" value="{{$productCategory->description}}" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Description">                       
                     </div> 
                 </div>  
             </div>

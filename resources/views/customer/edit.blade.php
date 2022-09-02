@@ -26,7 +26,7 @@
 </div>
 <center><h1><b>Edit Customer</b></h1></center>
 
-    <form method="POST" action ="{{route('customer.update',$Customer->id)}}">
+    <form method="POST" action ="{{route('customers.update',$Customer->id)}}">
         @csrf
         @method('patch')
         <div class="container mt-5">

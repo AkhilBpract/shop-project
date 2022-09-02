@@ -10,7 +10,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-9">
-      <a href = "{{route('customer.create')}}" class="btn btn-outline-primary">+ Create Customer</a>  
+      <a href = "{{route('customers.create')}}" class="btn btn-outline-primary">+ Create Customer</a>  
       </div>
       <div class="col-sm-3">
       <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</button></a></p>
@@ -40,8 +40,8 @@
           <td>{{$user->address}}</td>
           <td>{{$user->email}}</td>
           <td>@if($user->active == 1)active @else not in active @endif</td>
-          <td><a href="{{route('customer.edit',$user->id)}}"  class="btn btn-secondary">Edit </a></td>
-          <td><form action="{{route('customer.destroy',$user->id)}}" method="POST">
+          <td><a href="{{route('customers.edit',$user->id)}}"  class="btn btn-secondary">Edit </a></td>
+          <td><form action="{{route('customers.destroy',$user->id)}}" method="POST">
               @csrf
               @method('delete')
               <button class="btn btn-danger" type="submit">delete</button> 

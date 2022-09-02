@@ -15,6 +15,10 @@ class ReportController extends Controller
     
     public function profitreport(Request $request)
     {   
+        $validated = $request->validate([
+            'from_date'=>'required',
+            'to_date'=>'required',                     
+        ]);
         $amount = Transaction::getAmountWithDate($request);        
         $salesAmount = $amount['sale'];
         $purchaseAmount = $amount['purchase'];

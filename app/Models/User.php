@@ -18,6 +18,10 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
    
+    public function user()
+    {
+        return $this->hasOne(Transaction::class);
+    }
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = strtolower($name);
@@ -39,7 +43,15 @@ class User extends Authenticatable
         return ucfirst($address);
     }
    
-   
+   public function scopeCustomer($query)
+   {
+        return  $query->where('type','customer');
+   }
+    
+   public function scopeVendor($query)
+   {
+        return  $query->where('type','vendor');
+   }
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +65,7 @@ class User extends Authenticatable
         'address',
         'type',
         'active',
+        'user_id',
     ];
 
     /**

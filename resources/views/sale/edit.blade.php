@@ -29,9 +29,9 @@
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 <center><h1>Edit Sale</h1></center>
 </div>
-<form method="POST" action ="{{route('sale.update',$sales_data->id)}}">
+<form method="POST" action ="{{route('sales.update',$sale->id)}}">
     @csrf        
-    @method('patch')
+    @method('PUT')
     <div class="container mt-3">
         <div class="row">
             
@@ -40,7 +40,7 @@
                             <label for="exampleFormControlSelect1">Customer Name </label>
                             <select class="form-control"  name="user_id" id="user_id">                                
                             @foreach($users as $item)                       
-                            <option value="{{$item->id}}" {{ ( $item->id == $sales_data->user_id) ? 'selected' : '' }}>{{$item->name}}</option>
+                            <option value="{{$item->id}}" {{ ( $item->id == $sale->user_id) ? 'selected' : '' }}>{{$item->name}}</option>
                             @endforeach                        
                                
                         </select> 
@@ -50,14 +50,14 @@
          
                             <select class="form-control"name="product_id" id="product_id">                           
                             @foreach($product as $data)                          
-                            <option value="{{$data->id}}"{{($data->id == $sales_data->product_id)? 'selected' : '' }}>{{$data->product}}</option>
+                            <option value="{{$data->id}}"{{($data->id == $sale->product_id)? 'selected' : '' }}>{{$data->product}}</option>
                             @endforeach                                     
                         </select> 
                     </div>
      
                     <div class="form-group">
                         <label for="exampleInputPassword1">Quantity</label>
-                        <input type="text" name="quantity" value="{{$sales_data->quantity}}"  class="form-control" id="quantity_id"     placeholder="">
+                        <input type="text" name="quantity" value="{{$sale->quantity}}"  class="form-control" id="quantity_id"     placeholder="">
                     </div>    
 
             </div>
@@ -69,20 +69,20 @@
                             <select class="form-control"  name="product_category_id" id="category_id">
                            
                             @foreach($product_category as $item)
-                            <option value="{{$item->id}}" {{$item->id == $sales_data->product_category_id}} >{{$item->name}}</option>
+                            <option value="{{$item->id}}" {{$item->id == $sale->product_category_id}} >{{$item->name}}</option>
                             @endforeach                
                         </select>
                     </div> 
                     
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">price </label>                            
-                            <input class="form-control" type="text" value="{{$sales_data->price}}"  name="price"  id="pirce_id">
+                            <input class="form-control" type="text" value="{{$sale->price}}"  name="price"  id="pirce_id">
                              
                     </div>  
                       <div class="form-group">
                         <label for="exampleInputPassword1">Amount</label>
                       
-                        <input type="text" name="amount" value="{{$sales_data->amount}}"  class="form-control" id="amount" placeholder="">
+                        <input type="text" name="amount" value="{{$sale->amount}}"  class="form-control" id="amount" placeholder="">
                        
                     </div> 
                                            

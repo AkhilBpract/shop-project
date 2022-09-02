@@ -13,7 +13,7 @@ class AjaxController extends Controller
         return view('profitreport.product',compact('products'));
     }
 
-    public function price(Request $request)
+    public function salePrice(Request $request)
     {
         $product_id = $request->product_id;        
         $price = Product::where('id',$product_id)->value('sale_price');            

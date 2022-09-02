@@ -1,14 +1,13 @@
 <?php
 
+
 namespace App\Http\Controllers;
 use App\Models\User;
-use App\Models\Sale;
 use App\Models\ProductCategory;
 use App\Models\Transaction;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 class SaleController extends Controller
 {
     /**
@@ -18,8 +17,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales_data  =  Transaction::where('type','customer')->get();
-        // dd($sales_data);
+        $sales_data = Transaction::sale()->with('user')->get();       
         return view('sale.index',compact('sales_data'));
     }
 
@@ -31,8 +29,7 @@ class SaleController extends Controller
     public function create()
     {
         $category = ProductCategory::get();
-        $users = User::where('type','customer')->get();
-      
+        $users = User::where('type','customer')->get();      
         return view('sale.add',compact('category','users'));
     }
 
@@ -53,19 +50,18 @@ class SaleController extends Controller
             'amount'=>'required',            
         ]);       
         $request['date'] =Carbon::today();
-        $request['type']= 'customer';
-        Sale::create($request->all());
+        $request['type']= 'sales';
+        Transaction::create($request->all());
         return redirect()->back()->with('status','sale succesfully');
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sale  $sale
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Sale $sale)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -73,27 +69,25 @@ class SaleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sale  $sale
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sale $sale)
-    {
-        $sales_data =$sale;    
-        $users = User::where('type','customer')->get();          
-        $product = Product::where('id',$sales_data->product_id)->get();         
-        $product_category = ProductCategory::get();
-              
-        return view('sale.edit',compact('users','product_category','sales_data','product'));
+    public function edit(Transaction $sale)
+    {            
+        $users = User::customer()->get();          
+        $product = Product::where('id',$sale->product_id)->get();         
+        $product_category = ProductCategory::get();              
+        return view('sale.edit',compact('users','product_category','sale','product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sale  $sale
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sale $sale)
+    public function update(Request $request, Transaction $sale)
     {
         $validated = $request->validate([
             'product_category_id'=>'required',
@@ -110,17 +104,12 @@ class SaleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sale  $sale
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sale $sale)
+    public function destroy(Transaction $sale)
     {
         $sale->delete();
         return redirect()->back()->with('status','deleted successfully');
     }
-
-   
-
-  
 }
-

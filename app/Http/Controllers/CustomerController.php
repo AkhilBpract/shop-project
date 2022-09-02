@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Customer;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -14,8 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-       
-        $user= Customer::where('type','customer')->get();
+        $user= User::customer()->get();
         return view('customer.index',compact('user'));
     }
 
@@ -36,44 +35,37 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // dd($request);
+    {        
         $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
            'password'=>'required|password',
-        ]);
-        // dd($request);
-        $request['type'] = 'customer';
-        
-        Customer::create($request->all());
+        ]);     
+        $request['type'] = 'customer';   
+        $request['password'] = Hash::make('password');     
+        User::create($request->all());
         return redirect()->back()->with('status','create successfully');
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $Customer)
-    {
-        //
+    public function show(User $Customer)
+    {             
+        // 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $Customer)
+    public function edit(User $Customer)
     {
-        // $Customer->$id;
-        // dd($Customer->id);
-        $Customer = $Customer;
-        // dd($Customer->address);
         return view('customer.edit',compact('Customer'));
     }
 
@@ -81,13 +73,11 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $Customer)
+    public function update(Request $request, User $Customer)
     {
-        // dd($request->email);
-    
         $validated = $request->validate([
             'name'=>'required',         
             'email' => 'required|unique:users,email,'.$request->email.',email',
@@ -100,10 +90,10 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $Customer
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $Customer)
+    public function destroy(User $Customer)
     {
         $Customer->delete();
         return redirect()->back();

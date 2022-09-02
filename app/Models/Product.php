@@ -12,6 +12,10 @@ class Product extends Model
     // protected $guarded = [];
     public function product_transaction()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->hasOne(Transaction::class);
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

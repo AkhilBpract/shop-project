@@ -31,32 +31,32 @@ class Transaction extends Model
     public static function getAmountWithDate($request)
     {         
         
-        $amount = [];            
-        $amount['sale'] = SELF::where( function($query) use($request){   
-
+        $amount = [];
+        $amount['sale'] = SELF::where( function($query) use($request){
             $fromDate = date($request->from_date);
-            $toDate = date($request->to_date);          
+            $toDate = date($request->to_date); 
 
             $query->whereBetween('date',[$fromDate,$toDate])->where('type','sales');
-            if($request->product_category_id ){
-                $query->where('product_category_id',$request->product_category_id);
-                if($request->product_id != "")
-                    $query->where('product_id',$request->product_id);
-            }    
+
+            if(! is_null($request->product_category_id) ){
+                $query ->where('product_category_id',$request->product_category_id) ;
+                if(! is_null($request->product_id) )
+                $query ->where('product_id',$request->product_id); } 
+
         })->sum('amount'); 
         
          $amount['purchase'] = SELF::where( function($query) use($request){
-            
             $fromDate = date($request->from_date);
             $toDate = date($request->to_date);
-            
+
             $query->whereBetween('date',[$fromDate,$toDate])->where('type','purchase');
-            if($request->product_category_id ){
-                $query->where('product_category_id',$request->product_category_id);
-                if($request->product_id != "")
-                $query->where('product_id',$request->product_id);     
-        }})->sum('amount');      
-      
+
+            if(! is_null($request->product_category_id) ){
+                $query ->where('product_category_id',$request->product_category_id) ;
+                if(! is_null($request->product_id) )
+                $query ->where('product_id',$request->product_id);  }
+
+        })->sum('amount');    
         return  $amount;
     }
     

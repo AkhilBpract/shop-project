@@ -34,7 +34,7 @@
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Product Category</label>
                             <select class="form-control"  name="product_category_id" id="category_id">
-                           <option>-select-</option>
+                           <option value="">-select-</option>
                             @foreach($product_category as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach                

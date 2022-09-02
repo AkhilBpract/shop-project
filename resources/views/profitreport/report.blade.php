@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>
+    <a href="{{url()->previous() }}" class="btn btn-info">Back</a>
     <div class="container">
       <center><u><h1>Report</h1></u></center>
         <h4><p>SalesAmount : $ {{$salesAmount}}</p></h4>

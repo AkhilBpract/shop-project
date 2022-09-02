@@ -17,7 +17,7 @@
         </ul>
     </div>
 @endif
-
+<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
 <div class="container">
     <p align="right"><a href = "{{route('dashboard')}}"><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
 </div> 

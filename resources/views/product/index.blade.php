@@ -19,7 +19,7 @@
     </div>
   </div>
   
-
+  <a href="{{url()->previous() }}" class="btn btn-info">Back</a>
 <div class="container">
  <table class="table" >
  <h4>Product </h4>

@@ -12,6 +12,7 @@
             {{ session('status') }}
         </div>
 @endif
+<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
     <div class="container">
         <div class="row">
             <div class="col-sm-9">

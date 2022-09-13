@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>  
-  <a href="{{url()->previous() }}" class="btn btn-info">Back</a>
+  <a href="{{route('dashboard')}}"class="btn btn-info">Back</a>
 
     <div class="container">
     <div class="row">
@@ -21,25 +21,37 @@
     </div>
   </div>
   
-
+  @if(count($employees) > 0) 
 <div class="container">
  <table class="table" >
  <h4>Employees </h4>
     <thead>
       <tr>
         <th>Name</th>
-        <th>Edit</th>
+        <th>Department</th>
+        <th>Edit</th> 
+        <th>Delete</th>
       </tr>
     </tead>
     <tbody >
     @foreach($employees as $user)
+    @foreach($user->roles as $role)
       <tr>       
         <td>{{$user ->name }}</td>
-        <td><a href="{{route('employees.edit',$user->id)}}"  class="btn btn-secondary">Edit </a></td>
+        <td>{{$role ->role}}</td>
+        <td><a href="{{route('employees.edit',$user->id)}}"  class="btn btn-secondary">Edit</a></td>
+        <td><form action="{{route('employees.destroy',$user->id)}}" method="POST">
+              @csrf
+              @method('patch')
+              <button type="submit" value="delete" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    @endforeach
     @endforeach
     </tbody>
 </table> 
 </div> 
+@else <center>Empty</center>@endif
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
 </html>

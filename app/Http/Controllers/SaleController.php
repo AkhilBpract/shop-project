@@ -19,7 +19,8 @@ class SaleController extends Controller
     public function index()
     { 
         if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('sales department' )){
-        $sales_data = Transaction::sale()->with('user')->get();         
+        $sales_data = Transaction::sale()->with('user')->get(); 
+        // dd($sales_data);        
         return view('sale.index',compact('sales_data'));
         }
         if(Auth::user()->hasRole('customer') ||Auth::user()->hasRole('vendor') ){

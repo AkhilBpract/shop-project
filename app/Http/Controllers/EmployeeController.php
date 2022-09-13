@@ -16,7 +16,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::where('type','employee')->get();
+        $employees = User::with('roles')->where('type','employee')->get();        
         return view('employee.index',compact('employees')); 
     }
 
@@ -69,9 +69,11 @@ class EmployeeController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
-    {
-        //
+    public function edit(User $employee)
+    {   
+     
+        $role = Role::get();       
+        return view('employee.edit',compact('employee','role'));
     }
 
     /**
@@ -81,9 +83,16 @@ class EmployeeController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $employee)
     {
-        //
+        $validated = $request->validate([
+            'name'=>'required',
+            'email' => 'required|email|unique:users,email',            
+        ]);  
+        $user=Role::where('id',$employee)->first();                  
+        $employee->update($request->except('role'));       
+        $employee->roles()->attach(Role::where('role')->first());       
+        return redirect()->back()->with('status','create successfully');
     }
 
     /**
@@ -92,8 +101,9 @@ class EmployeeController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->back();
     }
 }

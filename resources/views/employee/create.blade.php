@@ -21,7 +21,7 @@
             {{ session('status') }}
         </div>
 @endif
-<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
+<a href="{{route('employees.index')}}"class="btn btn-info">Back</a>
 <div class="container">
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Roles</label>
-                            <select class="form-control"  name="role" id="exampleFormControlSelect1">
+                            <select class="form-control"  name="role[]" id="exampleFormControlSelect1">
                             <option value = "">-select-</option>
                             @foreach($role as $item)
                             <option value= "{{$item->id}}" >{{$item->role}}</option>

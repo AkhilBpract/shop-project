@@ -12,50 +12,45 @@
             {{ session('status') }}
         </div>
 @endif
-<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
+<a href="{{route('dashboard')}}" class="btn btn-info">Back</a>
   <div class="container">
   <div class="row">
       <div class="col-sm-9">      
         <a href="{{ route('product_category.create') }}" class="btn btn-outline-primary">+Create Category</a>
       </div>
       <div class ="col-sm-3">
-        <p align="right"><a href = "{{route('dashboard')}}""><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
+        <p align="right"><a href = "{{route('dashboard')}}"><button type="submit" class="btn btn-outline-primary">>> back to dashboard</button></a>  </p>
       </div>
   </div>
   </div>
+  @if(count($category) > 0) 
  <div class="container">
   <table class="table">  
     <thead>
-        <tr>
-      
+        <tr>      
         <th>Categories</h>        
         <th>Edit</h>
         <th>Delete</h>
         </tr>
-    </teah>
-   
+    </teah>   
     <tbody>
-    @foreach($category as $data)
-    
-        <tr>
-       
-        <td>{{$data->name}}</td> 
-
+    @foreach($category as $data)    
+        <tr>       
+        <td>{{$data->name}}</td>
         <td><a href="{{route('product_category.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
-
-           <td>         
+        <td>         
           <form action="{{route('product_category.destroy',$data->id)}}" method="POST">
-          @method('delete')
-          @csrf
-          <button class="btn btn-danger" type="submit">delete</button> 
+            @method('delete')
+            @csrf
+            <button class="btn btn-danger" type="submit">delete</button> 
           </form>           
-          </td>     
-          </tr>
+        </td>     
+        </tr>
         @endforeach
     </tbody>
 </table>
 </div>
-     
+     @else<center> Empty </center>@endif
         
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

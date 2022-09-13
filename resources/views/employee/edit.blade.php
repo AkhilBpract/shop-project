@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>
+  <div>  
+
+</div>
   @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -21,31 +24,32 @@
             {{ session('status') }}
         </div>
 @endif
-<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
+<a href="{{route('employees.index')}}" class="btn btn-info">Back</a>
 <div class="container">
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 </div>
 <center><h1><b>Create Employee</b></h1></center>    
-<form method="POST" action ="{{route('employees.update')}}">
+<form method="POST" action ="{{route('employees.update',$employee->id)}}">
         @csrf
+        @method('patch')
         <div class="container mt-5">
             <div class="row">
             <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Employee Name</label>
-                        <input type="text" name="name" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
+                        <input type="text" name="name" value="{{$employee->name}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
                     </div>
                     <div class="form-group mt-4">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" name="email" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Email">                       
+                        <input type="email" name="email" value="{{$employee->email}}" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Email">                       
                     </div> 
                     <label>Active or Not</label>
                     <div class="form-check form-check-inline mt-3">
-                        <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1" checked>
+                        <input class="form-check-input" type="radio" name="active" id="inlineRadio1" value="1" {{($employee->active == "1") ? "checked" : ""}}>
                         <label class="form-check-label" for="inlineRadio1">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0">
+                        <input class="form-check-input" type="radio" name="active" id="inlineRadio2" value="0" {{($employee->active == "0") ? "checked" : ""}}>
                         <label class="form-check-label" for="inlineRadio2">No</label>
                     </div>                                               
 
@@ -55,19 +59,17 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Address</label>
-                        <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="2"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
+                        <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="2">{{$employee->address}}</textarea>
+                    </div>                    
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Category</label>
                             <select class="form-control"  name="product_category_id" id="exampleFormControlSelect1">
-                            <option >-select-</option>
+                            <option >-select-</option>     
+                           
                             @foreach($role as $item)
                             <option value= "{{$item->id}}" >{{$item->role}}</option>
                             @endforeach     
+                           
                         </select>
                     </div>      
                     

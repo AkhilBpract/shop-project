@@ -16,9 +16,9 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->foreignId('product_category_id')->constrained();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('product_category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('type');
             $table->string('quantity');
             $table->string('price');

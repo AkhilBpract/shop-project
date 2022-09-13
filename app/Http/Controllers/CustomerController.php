@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class CustomerController extends Controller
 {
     /**
@@ -35,15 +36,19 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
-        $validated = $request->validate([
+    {        $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
            'password'=>'required|password',
-        ]);     
+    ]);     
         $request['type'] = 'customer';   
-        $request['password'] = Hash::make('password');     
-        User::create($request->all());
+        $request['password'] = Hash::make('password'); 
+        
+        // $role = Role::create(['role' => 'customer']);
+        $role = Role::where('role','customer')->value('id');       
+        $user = User::create($request->all());
+        $user->roles()->attach($role);   
+        
         return redirect()->back()->with('status','create successfully');
     }
 

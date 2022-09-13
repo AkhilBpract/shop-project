@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use DB;
 class DatabaseSeeder extends Seeder
@@ -15,6 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AkhilSeeder::class,           
+        ]);
+        $this->call([
+            RoleSeeder::class,           
         ]);
     }
 }

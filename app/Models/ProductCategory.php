@@ -11,10 +11,7 @@ class ProductCategory extends Model
 
     protected $fillable = ['name','description','active','product_category_id','category_id','product','vendor_price','sale_price','active','description'];
 
-    public function transaction()
-    {
-        return $this->hasOne(Transaction::class);
-    }
+  
 
    public function product()
     {

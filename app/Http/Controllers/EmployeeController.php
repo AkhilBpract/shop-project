@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Vendor;
-use App\Models\User;
 use App\Models\Role;
-use App\Models\UserRole;
+use App\Models\User;
 use Illuminate\Http\Request;
-
-class VendorController extends Controller
+use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Validator;
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,8 @@ class VendorController extends Controller
      */
     public function index()
     {
-       
-        $user= User::vendor()->get();   
-        return view('vendor.index',compact('user'));
-        
+        $employees = User::where('type','employee')->get();
+        return view('employee.index',compact('employees')); 
     }
 
     /**
@@ -30,7 +27,8 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('vendor.add');
+        $role = Role::get();
+        return view('employee.create',compact('role'));
     }
 
     /**
@@ -41,18 +39,17 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
-           'password'=>'required',
+            'password' => 'required'
         ]);
-        $request['password'] = Hash::make('password');
-        $request['type'] = 'vendor';
-        // $role = Role::create(['role' => 'vendor']);
-        $role = Role::where('role','vendor')->value('id');  
-        $user = User::create($request->all());
-        $user->roles()->attach($role);   
-        return redirect()->back()->with('status','create successfully ');
+        $request['type'] = 'employee';   
+        $request['password'] = Hash::make('password');             
+        $user = User::create($request->except('role'));
+        $user->roles()->attach($request->role);       
+        return redirect()->back()->with('status','create successfully');
     }
 
     /**
@@ -72,9 +69,9 @@ class VendorController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $vendor)
-    {      
-        return view('vendor.edit',compact('vendor'));
+    public function edit(User $user)
+    {
+        //
     }
 
     /**
@@ -84,15 +81,9 @@ class VendorController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $vendor)
+    public function update(Request $request, User $user)
     {
-        $validated = $request->validate([
-            'name'=>'required',
-            'email' => 'required|unique:users,email,'.$request->email.',email',          
-        ]);       
-        $request['type'] = 'vendor';
-        $vendor->update($request->all());
-        return redirect()->back()->with('status','edit successfully ');
+        //
     }
 
     /**
@@ -101,10 +92,8 @@ class VendorController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $vendor)
-    {  
-        $vendor->delete(); 
-
-        return redirect()->back()->with('status','deleted successfully');
+    public function destroy(User $user)
+    {
+        //
     }
 }

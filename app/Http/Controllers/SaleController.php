@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\ProductCategory;
 use App\Models\Transaction;
 use App\Models\Product;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 class SaleController extends Controller
@@ -16,9 +17,16 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $sales_data = Transaction::sale()->with('user')->get();       
+    { 
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('sales department' )){
+        $sales_data = Transaction::sale()->with('user')->get();         
         return view('sale.index',compact('sales_data'));
+        }
+        if(Auth::user()->hasRole('customer') ||Auth::user()->hasRole('vendor') ){
+            $sales_data = Transaction::where('user_id',Auth::user()->id)->get();
+             
+            return view('sale.index',compact('sales_data'));
+            }
     }
 
     /**

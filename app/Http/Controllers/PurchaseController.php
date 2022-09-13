@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 class PurchaseController extends Controller
 {
     /**
@@ -16,9 +17,16 @@ class PurchaseController extends Controller
      */
     public function index()
     {      
+        if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('purchase department'))
+        {
         $purchase_datas   = Transaction::purchase()->get();
         return view('purchase.index',compact('purchase_datas'));
-
+        }
+        if(Auth::user()->hasRole('vendor'))
+        {
+        $purchase_datas   = Transaction::where('user_id',Auth::user()->id)->get();
+        return view('purchase.index',compact('purchase_datas'));
+        }
         
     }
 

@@ -23,7 +23,7 @@
             {{ session('status') }}
         </div>
 @endif
-<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
+<a href="{{route('sales.index')}}" class="btn btn-info">Back</a>
 <div class="container">
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 <center><h1>Create Sales</h1></center>
@@ -91,6 +91,7 @@
             </div>
     </div>
 </form> 
+
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>

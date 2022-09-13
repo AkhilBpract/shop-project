@@ -21,18 +21,18 @@
             {{ session('status') }}
         </div>
 @endif
-<a href="{{route('customers.index')}}" class="btn btn-info">Back</a>
+<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
 <div class="container">
 <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">> back to dashboard</button></a>  </p>
 </div>
-<center><h1><b>Create Customer</b></h1></center>    
-<form method="POST" action ="{{route('customers.store')}}">
+<center><h1><b>Create Employee</b></h1></center>    
+<form method="POST" action ="{{route('employees.update')}}">
         @csrf
         <div class="container mt-5">
             <div class="row">
             <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Customer Name</label>
+                        <label for="exampleInputEmail1">Employee Name</label>
                         <input type="text" name="name" class="form-control" id="Enter Username" aria-describedby="emailHelp" placeholder="Enter Username">                       
                     </div>
                     <div class="form-group mt-4">
@@ -61,7 +61,15 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
-                             
+                    <div class="form-group">
+                            <label for="exampleFormControlSelect1">Category</label>
+                            <select class="form-control"  name="product_category_id" id="exampleFormControlSelect1">
+                            <option >-select-</option>
+                            @foreach($role as $item)
+                            <option value= "{{$item->id}}" >{{$item->role}}</option>
+                            @endforeach     
+                        </select>
+                    </div>      
                     
             </div>
             <div class="pt-5">

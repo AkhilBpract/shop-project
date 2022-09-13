@@ -13,11 +13,14 @@
         </div>
 @endif
     
-<a href="{{url()->previous() }}" class="btn btn-info">Back</a>
+<a href="{{route('dashboard')}}" class="btn btn-info">Back</a>
     <div class="container">
         <div class="row">
+        
             <div class="col-sm-9">
+            @if(Auth::user()->hasRole('admin') ||Auth::user()->hasRole('purchase department') ) 
             <a href = "{{route('purchases.create')}}" class="btn btn-outline-primary">Create Purchase</a>
+            @endif
             </div>
             <div class="col-sm-3">
             <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</a></p>
@@ -38,8 +41,10 @@
         <th>Quntity</th>
         <th>Price</th>
         <th>Total Amount</th>
+        @if(Auth::user()->hasRole('admin') ||Auth::user()->hasRole('purchase department') ) 
         <th>Edit</th>
         <th>Delete</th>
+        @endif
         </tr>
     </teah>
 
@@ -54,6 +59,7 @@
         <td>{{$data->quantity}}</td>
         <td>{{$data->price}}</td>        
         <td>{{$data->amount}}</td>
+        @if(Auth::user()->hasRole('admin') ||Auth::user()->hasRole('purchase department') ) 
         <td><a href="{{route('purchases.edit',$data->id)}}"  class="btn btn-secondary">Edit </a></td>
         <td><form action="{{route('purchases.destroy',$data->id)}}" method="POST">
               @csrf
@@ -61,16 +67,12 @@
               <button class="btn btn-danger" type="submit">delete</button> 
             </td> 
         </form>  
+        @endif       
       
-      </tr>
-     
-      @endforeach
-   
-    </tbody>
-    
+      </tr>     
+      @endforeach   
+    </tbody>    
     </table>
-  
-
 </div>
         
       

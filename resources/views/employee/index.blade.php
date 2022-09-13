@@ -13,7 +13,7 @@
     <div class="container">
     <div class="row">
       <div class="col-sm-9">
-      <a href = "{{route('product.create')}}" class="btn btn-outline-primary">+ Add Product</button></a>
+      <a href = "{{route('employees.create')}}" class="btn btn-outline-primary">+ Add Employee</button></a>
       </div>
       <div class="col-sm-3">
       <p align="right"><a href = "{{route('dashboard')}}" class="btn btn-outline-primary">>> back to dashboard</button></a></p>
@@ -21,40 +21,22 @@
     </div>
   </div>
   
-  
+
 <div class="container">
  <table class="table" >
- <h4>Product </h4>
+ <h4>Employees </h4>
     <thead>
-        <tr>
-            <th>Category</th>
-            <th>Product</th>
-            <th>Vendor price</th>
-            <th>Sale price</th>
-            <th>Status</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
+      <tr>
+        <th>Name</th>
+        <th>Edit</th>
+      </tr>
     </tead>
     <tbody >
-    @foreach($product as $products)
-       
-        <tr>
-            <td>{{$products->product_category->name}}</td>
-            <td>{{$products->product}}</td> 
-            <td>{{$products->vendor_price}}</td> 
-            <td>{{$products->sale_price}}</td> 
-            <td>@if($products->active == 1)active @else Not Active @endif</td> 
-            <td><a href="{{route('product.edit',$products->id)}}" class="btn btn-secondary">Edit </a></td>
-            <td><form action="{{route('product.destroy',$products->id)}}" method="POST">
-            @csrf
-            @method('delete')
-            <button class="btn btn-danger" type="submit">delete</button> 
-            </td> 
-            </form> 
-        </tr>
-      
-    @endforeach   
+    @foreach($employees as $user)
+      <tr>       
+        <td>{{$user ->name }}</td>
+        <td><a href="{{route('employees.edit',$user->id)}}"  class="btn btn-secondary">Edit </a></td>
+    @endforeach
     </tbody>
 </table> 
 </div> 

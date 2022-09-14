@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Roles</label>
-                            <select class="form-control"  name="role[]" id="exampleFormControlSelect1">
+                            <select  class="form-control"  name="role" id="exampleFormControlSelect2">
                             <option value = "">-select-</option>
                             @foreach($role as $item)
                             <option value= "{{$item->id}}" >{{$item->role}}</option>

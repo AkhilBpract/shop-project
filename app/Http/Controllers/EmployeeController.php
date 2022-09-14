@@ -103,6 +103,7 @@ class EmployeeController extends Controller
      */
     public function destroy(User $employee)
     {
+        
         $employee->delete();
         return redirect()->back();
     }

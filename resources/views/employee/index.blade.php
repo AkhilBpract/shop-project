@@ -27,6 +27,7 @@
  <h4>Employees </h4>
     <thead>
       <tr>
+      <th>#</th>
         <th>Name</th>
         <th>Department</th>
         <th>Edit</th> 
@@ -36,13 +37,14 @@
     <tbody >
     @foreach($employees as $user)
     @foreach($user->roles as $role)
-      <tr>       
+      <tr>      
+      <td>{{$loop ->iteration }}</td> 
         <td>{{$user ->name }}</td>
         <td>{{$role ->role}}</td>
         <td><a href="{{route('employees.edit',$user->id)}}"  class="btn btn-secondary">Edit</a></td>
         <td><form action="{{route('employees.destroy',$user->id)}}" method="POST">
               @csrf
-              @method('patch')
+              @method('delete')
               <button type="submit" value="delete" class="btn btn-danger">Delete</button>
             </form>
         </td>

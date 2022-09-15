@@ -11,6 +11,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ResetPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,4 +67,12 @@ Route::middleware([
 
     Route::resource('vendors', VendorController::class)->middleware(['auth','purchasedepartment']);
 
+    // forgot password 
+    
+    Route::get('forgot password',[ResetPasswordController::class,'index'])->name('forgot_password');
 
+    Route::post('resetLink/eamil',[ResetPasswordController::class,'resetLink'])->name('reset_link');
+
+    Route::get('reset/password/{token}',[ResetPasswordController::class,'forgotPassword'])->name('reset_form');
+
+    Route::post('reset/',[ResetPasswordController::class,'resetPassword'])->name('reset_password');

@@ -95,6 +95,6 @@ class ProductCategoryController extends Controller
     {
        
         $productCategory->delete(); 
-        return redirect()->back();      
+        return redirect()->back()->with('status','deleted successfully');
     }
 }

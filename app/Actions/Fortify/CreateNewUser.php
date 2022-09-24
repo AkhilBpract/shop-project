@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Notifications\sendNotificcation;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -32,6 +33,12 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+        // $admin = User::where('id','1')->value('email');     
+        // dd($admin);   
+        // \Notification::route('mail', $admin)->notify(new sendNotificcation($user));
+        // \Notification::to('test@gmail.com')->send(new sendNotificcation($user));
+        // \Notification::send($admin ,new sendNotificcation($user));  
+
         return $user;
     }
 }

@@ -57,7 +57,8 @@ class SaleController extends Controller
             'quantity'=>'required',            
             'price'=>'required', 
             'amount'=>'required',            
-        ]);       
+        ]);    
+ 
         $request['date'] =Carbon::today();
         $request['type']= 'sales';
         Transaction::create($request->all());

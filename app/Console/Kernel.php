@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        
+        $schedule->command('delete:transaction')->everyMinute();
     }
 
     /**
@@ -29,4 +30,10 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+
+   protected $commands = [
+    Commands\DeleteTransaction::class
+];
+
 }

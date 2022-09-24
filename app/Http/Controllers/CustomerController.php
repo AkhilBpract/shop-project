@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\SendEmail;
 class CustomerController extends Controller
 {
     /**
@@ -39,15 +40,18 @@ class CustomerController extends Controller
     {        $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
-           'password'=>'required|password',
+           'password'=>'required',
     ]);     
+   
         $request['type'] = 'customer';   
-        $request['password'] = Hash::make('password'); 
-        
+        $request['password'] = Hash::make('password');        
         // $role = Role::create(['role' => 'customer']);
         $role = Role::where('role','customer')->value('id');       
         $user = User::create($request->all());
-        $user->roles()->attach($role);   
+        $user->roles()->attach($role);      
+        // $email = new SendEmail();       
+        // $this->dispatch($email); 
+        SendEmail::dispatch('akhil@bpract.com', 'Akhil');
         
         return redirect()->back()->with('status','create successfully');
     }

@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\SendEmail;
 class EmployeeController extends Controller
 {
     /**
@@ -43,12 +42,15 @@ class EmployeeController extends Controller
         $validated = $request->validate([
             'name'=>'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required'
+            'password' => 'required',
+           
         ]);
         $request['type'] = 'employee';   
         $request['password'] = Hash::make('password');             
         $user = User::create($request->except('role'));
-        $user->roles()->attach($request->role);       
+        $user->roles()->attach($request->role);
+        // $emp_mail = $request->email;        
+        SendEmail::dispatch('1');
         return redirect()->back()->with('status','create successfully');
     }
 
@@ -105,6 +107,6 @@ class EmployeeController extends Controller
     {
         
         $employee->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success','successfully deleted');
     }
 }
